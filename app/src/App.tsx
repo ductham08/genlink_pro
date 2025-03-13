@@ -3,6 +3,7 @@ import { Layout, Form, Input, Button, Upload, message, Typography } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './App.css';
 import axios from 'axios';
+import LinkNotification from './components/LinkNotification';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -12,6 +13,7 @@ function App() {
   const [form] = Form.useForm();
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [generatedUrl, setGeneratedUrl] = useState<string | null>(null);
 
   const onFinish = async (values: any) => {
     if (!imageFile) {
@@ -28,6 +30,8 @@ function App() {
       formData.append('image', imageFile);
 
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generate-landing`, formData);
+
+      setGeneratedUrl(response.data.url);
 
       message.success('Đã tạo trang landing thành công! Bạn có thể truy cập tại: ' + response.data.url + '. Ảnh có thể được tải về tại: ' + response.data.imageUrl);
       form.resetFields();
@@ -117,6 +121,10 @@ function App() {
               </Button>
             </Form.Item>
           </Form>
+
+          {generatedUrl && (
+            <LinkNotification url={generatedUrl} />
+          )}
         </div>
       </Content>
     </Layout>
