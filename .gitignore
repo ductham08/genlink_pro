@@ -29,7 +29,6 @@ uploads/
 
 # Environment files
 .env
-.env.*
 
 # Lock files
 package-lock.json

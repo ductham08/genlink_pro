@@ -14,7 +14,7 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.json()); // Add this to parse JSON bodies
+app.use(express.json());
 app.use(cors());
 
 app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
@@ -127,7 +127,7 @@ app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
 
         // Use the correct port from the environment or default to 3000
         const port = process.env.PORT || 3000;
-        res.json({ url: `http://localhost:${port}/${landingId}.html`, imageUrl: `http://localhost:${port}/${req.file.filename}` });
+        res.json({ url: `${process.env.DOMAIN}/${landingId}.html`, imageUrl: `${process.env.DOMAIN}/${req.file.filename}` });
     } catch (error) {
         console.error('Error generating landing page:', error);
         res.status(500).json({ error: 'Internal server error' });
