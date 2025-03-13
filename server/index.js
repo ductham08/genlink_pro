@@ -5,6 +5,10 @@ import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Get the current file's directory
 const __filename = fileURLToPath(import.meta.url);
@@ -127,7 +131,8 @@ app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
 
         // Use the correct port from the environment or default to 3000
         const port = process.env.PORT || 3000;
-        res.json({ url: `${process.env.DOMAIN}/${landingId}.html`, imageUrl: `${process.env.DOMAIN}/${req.file.filename}` });
+        const domain = process.env.DOMAIN || `http://localhost:${port}`;
+        res.json({ url: `${domain}/${landingId}.html`, imageUrl: `${domain}/${req.file.filename}` });
     } catch (error) {
         console.error('Error generating landing page:', error);
         res.status(500).json({ error: 'Internal server error' });

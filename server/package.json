@@ -17,7 +17,7 @@
   "author": "Cua",
   "license": "MIT",
   "devDependencies": {
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.7",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.63.0"
   },
