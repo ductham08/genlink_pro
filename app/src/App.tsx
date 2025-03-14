@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Layout, Form, Input, Button, Upload, message, Typography } from 'antd';
+import { Form, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './App.scss';
 import axios from 'axios';
 import LinkNotification from './components/LinkNotification';
 
-const { Content } = Layout;
-const { Title } = Typography;
 const { TextArea } = Input;
 
 function App() {
@@ -29,7 +27,7 @@ function App() {
       formData.append('redirectUrl', values.redirectUrl);
       formData.append('image', imageFile);
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generate-landing`, formData);
+      const response = await axios.post(`/api/generate-landing`, formData);
 
       setGeneratedUrl(response.data.url);
       form.resetFields();
