@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography, Button, Tooltip, Modal } from 'antd';
 import { CopyOutlined, LinkOutlined } from '@ant-design/icons';
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 interface LinkNotificationProps {
   url: string;
