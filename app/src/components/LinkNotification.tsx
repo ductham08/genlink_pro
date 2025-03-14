@@ -36,34 +36,30 @@ const LinkNotification: React.FC<LinkNotificationProps> = ({ url, onClose }) => 
   };
 
   return (
-    <Modal
-      title="Trang Landing đã được tạo thành công!"
-      visible={isModalVisible}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      footer={[
-        <Button key="back" onClick={handleCancel}>
-          Đóng
-        </Button>,
-      ]}
-    >
-      <Paragraph>
-        Bạn có thể truy cập tại: <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
-      </Paragraph>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-        <Tooltip title="Sao chép liên kết">
-          <Button onClick={handleCopyLink} icon={<CopyOutlined />}>
-            Sao chép
-          </Button>
-        </Tooltip>
-        <Tooltip title="Mở liên kết">
-          <Button onClick={handleOpenLink} icon={<LinkOutlined />}>
-            Mở
-          </Button>
-        </Tooltip>
-      </div>
-    </Modal>
+    <div className='modal-link-notification'>
+      <Modal
+        title="Tạo link thành công!"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Tooltip key="copy" title="Sao chép liên kết">
+            <Button onClick={handleCopyLink} icon={<CopyOutlined />}>
+              Sao chép
+            </Button>
+          </Tooltip>,
+          <Tooltip key="open" title="Mở liên kết">
+            <Button onClick={handleOpenLink} icon={<LinkOutlined />}>
+              Mở
+            </Button>
+          </Tooltip>,
+        ]}
+      >
+        <Paragraph><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></Paragraph>
+        <i style={{color: 'red', fontSize: '13px'}}>* Link sẽ không lưu lại trên hệ thống, anh em vui lòng tự lưu lại để sử dụng và nhớ kiểm tra link trước khi làm để tránh phí nguyên liệu</i>
+      </Modal>
+    </div>
   );
 };
 
-export default LinkNotification; 
+export default LinkNotification;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Layout, Form, Input, Button, Upload, message, Typography } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import './App.css';
+import './App.scss';
 import axios from 'axios';
 import LinkNotification from './components/LinkNotification';
 
@@ -32,8 +32,6 @@ function App() {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generate-landing`, formData);
 
       setGeneratedUrl(response.data.url);
-
-      message.success('Đã tạo trang landing thành công! Bạn có thể truy cập tại: ' + response.data.url + '. Ảnh có thể được tải về tại: ' + response.data.imageUrl);
       form.resetFields();
       setImageFile(null);
     } catch (error) {
@@ -57,28 +55,42 @@ function App() {
   };
 
   return (
-    <Layout className="layout">
-      <Content style={{ padding: '50px' }}>
-        <div className="site-layout-content">
-          <Title level={2} style={{ textAlign: 'center', marginBottom: '40px' }}>
-            Tạo Trang Landing
-          </Title>
+    <div className="container">
+      <div className="col-md-6 col-12 content-form">
+        <Form
+          form={form}
+          name="landing-generator"
+          onFinish={onFinish}
+          layout="vertical"
+          className='form-landing'
+        >
+          <div className="item-form">
+            <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
+            <br />
+            <i>Link sẽ được tạo ra dạng: https://link-landing.com/link-landing-1234567890</i>
+            <hr />
+            <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
+            <br />
+            <i style={{cursor: 'pointer'}} onClick={() => navigator.clipboard.writeText('20023333388888')}>Số tài khoản: 20023333388888 (Click để copy)</i>
+            <br />
+            <i>Ngân hàng: Mb Bank</i>
+            <br />
+            <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
+          </div>
+          <hr />
 
-          <Form
-            form={form}
-            name="landing-generator"
-            onFinish={onFinish}
-            layout="vertical"
-            style={{ maxWidth: 600, margin: '0 auto' }}
-          >
+          <div className="item-form">
             <Form.Item
               name="title"
-              label="Tiêu đề Trang"
+              label="Tiêu đề"
               rules={[{ required: true, message: 'Vui lòng nhập tiêu đề!' }]}
             >
               <Input placeholder="Nhập tiêu đề trang web..." />
             </Form.Item>
+            <i>Tiêu đề sẽ hiển thị khi chia sẻ trang web</i>
+          </div>
 
+          <div className="item-form">
             <Form.Item
               name="description"
               label="Mô tả"
@@ -89,7 +101,10 @@ function App() {
                 placeholder="Nhập mô tả trang web..."
               />
             </Form.Item>
+            <i>Đoạn mô tả sẽ hiển thị khi chia sẻ trang web</i>
+          </div>
 
+          <div className="item-form">
             <Form.Item
               name="redirectUrl"
               label="URL Chuyển Hướng"
@@ -100,16 +115,22 @@ function App() {
             >
               <Input placeholder="https://example.com" />
             </Form.Item>
+            <i>Url của trang web muốn chuyển hướng tới</i>
+          </div>
 
+          <div className="item-form">
             <Form.Item
-              label="Tải lên Ảnh"
+              label="Ảnh meta"
               required
             >
               <Upload {...uploadProps}>
                 <Button icon={<UploadOutlined />}>Chọn Ảnh</Button>
               </Upload>
             </Form.Item>
+            <i>Kích thước chuẩn là 1200x600px, kích thước tối đa là 5MB</i>
+          </div>
 
+          <div className="item-form-submit">
             <Form.Item>
               <Button
                 type="primary"
@@ -120,14 +141,14 @@ function App() {
                 Tạo Trang Landing
               </Button>
             </Form.Item>
-          </Form>
+          </div>
+        </Form>
 
-          {generatedUrl && (
-            <LinkNotification url={generatedUrl} />
-          )}
-        </div>
-      </Content>
-    </Layout>
+        {generatedUrl && (
+          <LinkNotification url={generatedUrl} onClose={() => setGeneratedUrl(null)} />
+        )}
+      </div>
+    </div>
   );
 }
 
