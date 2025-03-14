@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import "../App.scss"
 
 const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -39,7 +38,7 @@ const LoginForm: React.FC = () => {
 
     return (
         <div className="container">
-            <div className="col-md-6 col-12 content-form">
+            <div className="col-md-5 col-12 content-form login-form">
                 <Form
                     name="normal_login"
                     className="login-form"

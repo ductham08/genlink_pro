@@ -3,7 +3,6 @@ import { Form, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import LinkNotification from './LinkNotification';
-import "../App.scss"
 
 const { TextArea } = Input;
 
@@ -69,7 +68,7 @@ const CreateLink: React.FC = () => {
                     <div className="item-form">
                         <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
                         <br />
-                        <i>Link sẽ được tạo ra dạng: https://link-landing.com/link-landing-1234567890</i>
+                        <i>Link sẽ được tạo ra dạng: https://link-landing.com/build/id-link</i>
                         <hr />
                         <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
                         <br />
@@ -79,7 +78,7 @@ const CreateLink: React.FC = () => {
                         <br />
                         <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
                         <br />
-                        <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a> !</i>
+                        <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <b><a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a></b> !</i>
                     </div>
                     <hr />
 

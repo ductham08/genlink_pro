@@ -1,13 +1,8 @@
-#root {
-  width: 100vw;
-  padding: 20px 0 20px 0;
-}
-
 .ant-input,
 .ant-input-affix-wrapper {
   border: 1px solid gainsboro;
   border-radius: 5px;
-  padding: 2px 11px;
+  padding: 4px 11px;
 }
 
 .ant-input:hover,
@@ -43,19 +38,95 @@ textarea.ant-input {
   outline: none;
 }
 
-.content-form{
+.content-form {
+  padding: 20px 0;
   margin: auto;
-  .item-form{
-    margin-bottom: 10px;
-    .ant-form-item{
-      margin-bottom: 7px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .ant-form {
+    width: 100%;
+
+    .item-form {
+      margin-bottom: 10px;
+
+      .ant-form-item {
+        margin-bottom: 7px;
+      }
+
+      i {
+        font-size: 12px;
+        color: #808080;
+      }
     }
-    i{
-      font-size: 12px;  
+
+    .item-form-submit {
+      margin-top: 20px;
+    }
+
+    .ant-upload {
+      .ant-btn {
+        width: auto;
+        margin: initial;
+        display: inline-block;
+      }
+    }
+
+    .ant-btn {
+      background-color: transparent;
+      border-color: #808080;
       color: #808080;
+      width: 100%;
+      margin: 0 auto;
+      display: block;
+
+      &:hover,
+      &:focus {
+        background-color: #808080 !important;
+        border-color: #808080 !important;
+        color: #fff !important;
+      }
+
+      &:active {
+        background-color: #666666 !important;
+        border-color: #666666 !important;
+      }
+
+      &.ant-btn-primary {
+        background-color: #808080;
+        border-color: #808080;
+        color: #fff;
+
+        &:hover,
+        &:focus {
+          background-color: #999999 !important;
+          border-color: #999999 !important;
+        }
+
+        &:active {
+          background-color: #666666 !important;
+          border-color: #666666 !important;
+        }
+      }
     }
   }
-  .item-form-submit{
-    margin-top: 20px;
+
+  &.login-form {
+    .ant-form {
+      width: 75%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-form {
+    &.login-form {
+      .ant-form {
+        width: 100%;
+      }
+    }
   }
 }
