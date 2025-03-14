@@ -38,21 +38,21 @@ app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <meta name="description" content="${description}">
-    <meta name="image" content="/${req.file.filename}">
+    <meta name="image" content="/build/${req.file.filename}">
     <meta name="keywords" content="${title}">
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="article">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
-    <meta property="og:image" content="/${req.file.filename}">
-    <meta property="og:image:url" content="/${req.file.filename}">
+    <meta property="og:image" content="/build/${req.file.filename}">
+    <meta property="og:image:url" content="/build/${req.file.filename}">
     <meta property="og:image:type" content="image/${path.extname(req.file.originalname).slice(1)}">
     <meta property="og:image:width" content="${req.file.size.width}">
     <meta property="og:image:height" content="${req.file.size.height}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
-    <meta name="twitter:image" content="/${req.file.filename}">
+    <meta name="twitter:image" content="/build/${req.file.filename}">
     <script>
         function detectBot() {
             const botPatterns = [
@@ -110,7 +110,7 @@ app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
 <body>
     <div id="content" style="display: none">
         <h1>${title}</h1>
-        <img src="/${req.file.filename}" alt="${title}" width="${req.file.size.width}" height="${req.file.size.height}">
+        <img src="/build/${req.file.filename}" alt="${title}" width="${req.file.size.width}" height="${req.file.size.height}">
         <p>${description}</p>
     </div>
 </body>
@@ -132,7 +132,7 @@ app.post('/api/generate-landing', upload.single('image'), async (req, res) => {
         // Use the correct port from the environment or default to 3000
         const port = process.env.PORT || 3000;
         const domain = process.env.DOMAIN || `http://localhost:${port}`;
-        res.json({ url: `${domain}/${landingId}.html`, imageUrl: `${domain}/${req.file.filename}` });
+        res.json({ url: `${domain}/build/${landingId}.html`, imageUrl: `${domain}/build/${req.file.filename}` });
     } catch (error) {
         console.error('Error generating landing page:', error);
         res.status(500).json({ error: 'Internal server error' });
