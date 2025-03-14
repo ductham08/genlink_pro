@@ -76,6 +76,8 @@ function App() {
             <i>Ngân hàng: Mb Bank</i>
             <br />
             <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
+            <br />
+            <i style={{color: 'red'}}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <a style={{color: 'red', textDecoration: 'none'}} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a> !</i>
           </div>
           <hr />
 
