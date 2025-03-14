@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import CreateLink from './components/CreateLink';
 import RegisterForm from './components/RegisterForm';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -9,8 +10,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/create-link" element={<CreateLink />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/create-link" element={<CreateLink />} />
+          </Route>
         </Routes>
       </div>
     </Router>
