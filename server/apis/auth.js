@@ -26,7 +26,7 @@ router.post('/api/login', async (req, res) => {
     // Tạo JWT token
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '2h' });
 
-    res.json({ message: 'Đăng nhập thành công, quay về trang chủ sau 1,5s!', token });
+    res.json({ message: 'Đăng nhập thành công!', token });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Có lỗi xảy ra, vui lòng thử lại!' });

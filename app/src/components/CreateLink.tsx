@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import axios from 'axios';
 import LinkNotification from './LinkNotification';
-import axiosInstance from '../config/axios';
 
 const { TextArea } = Input;
 
@@ -26,7 +26,7 @@ const CreateLink: React.FC = () => {
             formData.append('redirectUrl', values.redirectUrl);
             formData.append('image', imageFile);
 
-            const response = await axiosInstance.post(`/generate-landing`, formData, {
+            const response = await axios.post(`/api/generate-landing`, formData, {
                 headers: {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
