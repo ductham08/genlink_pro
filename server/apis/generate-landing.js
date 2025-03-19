@@ -5,8 +5,6 @@ import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import authMiddleware from '../middleware/auth.js';
-import User from '../models/user.js';
-import Link from '../models/link.js';
 
 // Get the current file's directory
 const __filename = fileURLToPath(import.meta.url);
@@ -17,26 +15,9 @@ const upload = multer({ dest: 'uploads/' });
 
 router.post('/api/generate-landing', authMiddleware, upload.single('image'), async (req, res) => {
   try {
+
     const { title, description, redirectUrl } = req.body;
     const imagePath = req.file.path;
-
-    // Lấy thông tin người dùng từ token
-    const userId = req.user.userId;
-
-    // Tìm người dùng trong cơ sở dữ liệu
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: 'Người dùng không tồn tại!' });
-    }
-
-    // Kiểm tra plan và số lượt tạo link còn lại
-    const plan = user.plan;
-    const remainingLinks = plan.totalLinks - plan.usedLinks;
-
-    if (remainingLinks <= 0) {
-      return res.status(403).json({ message: `Bạn đã hết số lượt tạo link. Vui lòng mua thêm hoặc liên hệ @otis_cua` });
-    }
 
     // Generate a unique ID for the landing page
     const landingId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -144,23 +125,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     // Use the correct port from the environment or default to 3000
     const port = process.env.PORT || 3000;
     const domain = process.env.DOMAIN || `http://localhost:${port}`;
-    const generatedUrl = `${domain}/build/${landingId}.html`;
-
-    // Lưu link vào cơ sở dữ liệu
-    const newLink = new Link({
-      username: user.username,
-      plan: plan.type,
-      createdAt: new Date(),
-      url: generatedUrl,
-      clicks: 0,
-    });
-    await newLink.save();
-
-    // Tăng số lượt đã tạo link của người dùng
-    user.plan.usedLinks += 1;
-    await user.save();
-
-    res.json({ url: generatedUrl, imageUrl: `${domain}/build/${req.file.filename}` });
+    res.json({ url: `${domain}/build/${landingId}.html`, imageUrl: `${domain}/build/${req.file.filename}` });
   } catch (error) {
     console.error('Error generating landing page:', error);
     res.status(500).json({ error: 'Internal server error' });
