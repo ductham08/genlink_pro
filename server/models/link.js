@@ -6,6 +6,7 @@ const linkSchema = new mongoose.Schema({
     plan: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     url: { type: String, required: true },
+    redirectUrl: { type: String, required: true }, // Link đích khi redirect
     clicks: { type: Number, default: 0 },
 });
 

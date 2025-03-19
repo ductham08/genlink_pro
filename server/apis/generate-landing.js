@@ -152,6 +152,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
       plan: plan.type,
       createdAt: new Date(),
       url: generatedUrl,
+      redirectUrl: redirectUrl, // Lưu link đích
       clicks: 0,
     });
     await newLink.save();
