@@ -12,7 +12,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/create-link" element={<CreateLink />} />
+            <Route path="/" element={<CreateLink />} />
           </Route>
         </Routes>
       </div>
