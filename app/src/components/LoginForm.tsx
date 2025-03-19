@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Modal } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -37,45 +38,50 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <div className="container">
-            <div className="col-md-5 col-12 content-form login-form">
-                <Form
-                    name="normal_login"
-                    className="login-form"
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
+        <Modal
+            title="Đăng nhập"
+            open={true}
+            footer={null}
+            closable={false}
+            maskClosable={false}
+            width={450}
+            centered
+        >
+            <Form
+                name="normal_login"
+                className="login-form"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+            >
+                <Form.Item
+                    name="username"
+                    rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
                 >
-                    <div className="item-form">
-                        <Form.Item
-                            name="username"
-                            rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
-                        >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Tên đăng nhập" />
-                        </Form.Item>
-                    </div>
-                    <div className="item-form">
-                        <Form.Item
-                            name="password"
-                            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
-                        >
-                            <Input.Password
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                type="password"
-                                placeholder="Mật khẩu"
-                            />
-                        </Form.Item>
-                    </div>
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Tên đăng nhập" />
+                </Form.Item>
 
-                    <div className="item-form-submit">
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-                                Đăng nhập
-                            </Button>
-                        </Form.Item>
-                    </div>
-                </Form>
-            </div>
-        </div>
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                >
+                    <Input.Password
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Mật khẩu"
+                    />
+                </Form.Item>
+
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="login-form-button" loading={loading} block>
+                        Đăng nhập
+                    </Button>
+                </Form.Item>
+
+                <div style={{ textAlign: 'center' }}>
+                    Chưa có tài khoản? <Link to="/register" style={{textDecoration: 'none'}}>Đăng ký ngay</Link>
+                </div>
+            </Form>
+        </Modal>
     );
 };
 
