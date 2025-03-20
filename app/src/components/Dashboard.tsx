@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Table, Statistic, Typography } from 'antd';
+import { Row, Col, Card, Table, Statistic } from 'antd';
 import { LinkOutlined, BarChartOutlined, EyeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import '../styles/Dashboard.scss';

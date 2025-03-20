@@ -3,8 +3,6 @@ import { Layout, Menu } from 'antd';
 import {
     HomeOutlined,
     LinkOutlined,
-    BarChartOutlined,
-    SettingOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined
 } from '@ant-design/icons';

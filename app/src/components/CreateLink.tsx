@@ -3,7 +3,6 @@ import { Form, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import LinkNotification from './LinkNotification';
-import MainLayout from './layouts/MainLayout';
 
 const { TextArea } = Input;
 
@@ -85,8 +84,8 @@ const CreateLink: React.FC = () => {
     };
 
     return (
-        <MainLayout>
-            <div className="container" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', margin: '0' }}>
+        <>
+            <div className="container" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
                 <div className="col-md-6 col-12 content-form">
                     <Form
                         form={form}
@@ -96,6 +95,22 @@ const CreateLink: React.FC = () => {
                         className='form-landing'
                         onValuesChange={handleFormChange}
                     >
+                        <div className="item-form">
+                            <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
+                            <br />
+                            <i>Link sẽ được tạo ra dạng: https://link-landing.com/build/id-link</i>
+                            <hr />
+                            <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
+                            <br />
+                            <i style={{ cursor: 'pointer' }} onClick={() => navigator.clipboard.writeText('20023333388888')}>Số tài khoản: 20023333388888 (Click để copy)</i>
+                            <br />
+                            <i>Ngân hàng: Mb Bank</i>
+                            <br />
+                            <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
+                            <br />
+                            <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <b><a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a></b> !</i>
+                        </div>
+                        <hr />
                         <div className="item-form">
                             <Form.Item
                                 name="title"
@@ -291,7 +306,7 @@ const CreateLink: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     );
 };
 
