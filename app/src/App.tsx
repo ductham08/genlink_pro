@@ -3,6 +3,7 @@ import LoginForm from './components/LoginForm';
 import CreateLink from './components/CreateLink';
 import RegisterForm from './components/RegisterForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<CreateLink />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/create-link" element={<CreateLink />} />
           </Route>
         </Routes>
       </div>
