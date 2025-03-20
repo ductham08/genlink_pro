@@ -28,6 +28,12 @@ app.use(generateLandingRouter);
 app.use(authRouter);
 app.use(registerRouter);
 
+// Handle clean URLs for landing pages
+app.get('/build/:id', (req, res) => {
+    const landingPath = path.join(__dirname, 'build', req.params.id, 'index.html');
+    res.sendFile(landingPath);
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

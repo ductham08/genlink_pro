@@ -39,7 +39,16 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     }
 
     // Generate a unique ID for the landing page
-    const landingId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const generateShortId = () => {
+        const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let result = '';
+        for (let i = 0; i < 12; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    };
+    
+    const landingId = generateShortId();
 
     // Create the HTML content
     const htmlContent = `
@@ -129,12 +138,11 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
 </html>
     `;
 
-    // Ensure directories exist
-    await fs.mkdir(path.join(__dirname, '../build'), { recursive: true });
-    await fs.mkdir(path.join(__dirname, '../uploads'), { recursive: true });
-
     // Save the HTML file
-    const htmlFilePath = path.join(__dirname, '../build', `${landingId}.html`);
+    const htmlFilePath = path.join(__dirname, '../build', `${landingId}/index.html`);
+    
+    // Create directory for this landing page
+    await fs.mkdir(path.join(__dirname, '../build', landingId), { recursive: true });
     await fs.writeFile(htmlFilePath, htmlContent);
 
     // Move the original image to the build folder
@@ -144,7 +152,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     // Use the correct port from the environment or default to 3000
     const port = process.env.PORT || 3000;
     const domain = process.env.DOMAIN || `http://localhost:${port}`;
-    const generatedUrl = `${domain}/build/${landingId}.html`;
+    const generatedUrl = `${domain}/build/${landingId}`;  // Removed .html extension
 
     // Lưu link vào cơ sở dữ liệu
     const newLink = new Link({
