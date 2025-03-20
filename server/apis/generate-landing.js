@@ -151,8 +151,8 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
 
     // Use the correct port from the environment or default to 3000
     const port = process.env.PORT || 3000;
-    const domain = process.env.DOMAIN || `http://localhost:${port}`;
-    const generatedUrl = `${domain}/build/${landingId}`;  // Removed .html extension
+    const domain = process.env.LANDING_DOMAIN || `http://localhost:${port}`;
+    const generatedUrl = `${domain}/build/${landingId}`;
 
     // Lưu link vào cơ sở dữ liệu
     const newLink = new Link({

@@ -1,3 +1,4 @@
+# Server block cho domain chính (a.com)
 server {
     listen 80;
     server_name marketting.setting-policy-plaform.com;
@@ -17,13 +18,59 @@ server {
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+
+        # Thêm CORS headers
+        add_header 'Access-Control-Allow-Origin' 'https://your-second-domain.com' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+        add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
+
+        if ($request_method = 'OPTIONS') {
+            add_header 'Access-Control-Allow-Origin' 'https://your-second-domain.com' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Content-Type' 'text/plain; charset=utf-8';
+            add_header 'Content-Length' 0;
+            return 204;
+        }
     }
 
     # Backend Static Files
     location /build/ {
         alias /home/genlink/server/build/;
         try_files $uri =404;
+
+        # Thêm CORS headers cho static files
+        add_header 'Access-Control-Allow-Origin' 'https://your-second-domain.com' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS' always;
     }
 
     error_page 404 /index.html;
+}
+
+# Server block cho domain thứ hai (b.com)
+server {
+    listen 80;
+    server_name your-second-domain.com;
+
+    # Chỉ phục vụ các file từ thư mục build
+    location /build/ {
+        # Proxy pass về server chính
+        proxy_pass http://marketting.setting-policy-plaform.com/build/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # Cache configuration
+        proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
+        proxy_cache_valid 200 1d;
+        proxy_cache_valid 404 1m;
+    }
+
+    # Redirect tất cả các request khác về trang chủ của domain chính
+    location / {
+        return 301 http://marketting.setting-policy-plaform.com$request_uri;
+    }
 }
