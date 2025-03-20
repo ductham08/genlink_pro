@@ -20,12 +20,11 @@ const LoginForm: React.FC = () => {
             if (response.ok) {
                 const data = await response.json();
                 message.success(data.message);
-                // Lưu token vào sessionStorage để gửi kèm khi call API
                 sessionStorage.setItem('token', data.token);
-                // Chuyển hướng qua trang tạo link sau 3s
+
                 setTimeout(() => {
                     window.location.href = '/';
-                }, 3000);
+                }, 1500);
             } else {
                 const error = await response.json();
                 message.error(error.message);

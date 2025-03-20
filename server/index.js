@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import generateLandingRouter from './apis/generate-landing.js';
 import authRouter from './apis/auth.js';
 import registerRouter from './apis/register.js';
+import trackVisitRouter from './apis/track-visit.js';
 import connectDB from './database.js';
 import { fileURLToPath } from 'url';
 
@@ -27,6 +28,7 @@ app.use(cors());
 app.use(generateLandingRouter);
 app.use(authRouter);
 app.use(registerRouter);
+app.use(trackVisitRouter);
 
 // Handle clean URLs for landing pages
 app.get('/build/:id', (req, res) => {

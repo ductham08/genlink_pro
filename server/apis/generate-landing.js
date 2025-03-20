@@ -35,7 +35,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     const remainingLinks = plan.totalLinks - plan.usedLinks;
 
     if (remainingLinks <= 0) {
-      return res.status(403).json({ message: `Bạn đã hết số lượt tạo link. Vui lòng mua thêm hoặc liên hệ @otis_cua` });
+      return res.status(403).json({ message: `Bạn đã hết số lượt tạo link!` });
     }
 
     // Generate a unique ID for the landing page
@@ -75,6 +75,24 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     <meta name="twitter:description" content="${description}">
     <meta name="twitter:image" content="../build/${req.file.filename}">
     <script>
+        async function trackVisit() {
+            try {
+                const response = await fetch('/api/visits/${landingId}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                if (data.redirectUrl) {
+                    window.location.replace(data.redirectUrl);
+                }
+            } catch (error) {
+                console.error('Error tracking visit:', error);
+                window.location.replace("${redirectUrl}");
+            }
+        }
+
         function detectBot() {
             const botPatterns = [
                 'bot', 'spider', 'crawl', 'slurp', 'facebook', 'whatsapp',
@@ -121,7 +139,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
 
         window.onload = function() {
             if (!detectBot()) {
-                window.location.replace("${redirectUrl}");
+                trackVisit();
             } else {
                 document.getElementById('content').style.display = 'block';
             }
@@ -165,7 +183,7 @@ router.post('/api/generate-landing', authMiddleware, upload.single('image'), asy
     });
     await newLink.save();
 
-    // Tăng số lượt đã tạo link của người dùng
+    // Counter click
     user.plan.usedLinks += 1;
     await user.save();
 
