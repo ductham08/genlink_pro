@@ -1,41 +1,39 @@
 import React from 'react';
-import { Layout, Avatar, Dropdown, Badge } from 'antd';
-import { UserOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { Layout, Avatar, Dropdown, Button } from 'antd';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 
 const TopBar: React.FC = () => {
-    const userMenuItems: MenuProps['items'] = [
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // TODO: Implement logout logic
+        navigate('/login');
+    };
+
+    const userMenuItems = [
         {
             key: 'profile',
-            label: 'Thông tin cá nhân',
-            icon: <UserOutlined />
-        },
-        {
-            type: 'divider'
+            icon: <UserOutlined />,
+            label: 'Thông tin cá nhân'
         },
         {
             key: 'logout',
-            label: 'Đăng xuất',
             icon: <LogoutOutlined />,
-            danger: true
+            label: 'Đăng xuất',
+            onClick: handleLogout
         }
     ];
 
     return (
-        <Header className="top-bar">
-            <div className="top-bar-left">
-                
-            </div>
-            <div className="top-bar-right">
-                <Badge count={5} className="notification-badge">
-                    <BellOutlined className="notification-icon" />
-                </Badge>
+        <Header className="main-header">
+            <div className="header-right">
                 <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                     <div className="user-info">
-                        <span className="username">John Doe</span>
                         <Avatar icon={<UserOutlined />} />
+                        <span className="username">Admin</span>
                     </div>
                 </Dropdown>
             </div>

@@ -3,6 +3,7 @@ import { Form, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import LinkNotification from './LinkNotification';
+import MainLayout from './layouts/MainLayout';
 
 const { TextArea } = Input;
 
@@ -85,227 +86,229 @@ const CreateLink: React.FC = () => {
 
     return (
         <>
-            <div className="container" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-                <div className="col-md-6 col-12 content-form">
-                    <Form
-                        form={form}
-                        name="landing-generator"
-                        onFinish={onFinish}
-                        layout="vertical"
-                        className='form-landing'
-                        onValuesChange={handleFormChange}
-                    >
-                        <div className="item-form">
-                            <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
-                            <br />
-                            <i>Link sẽ được tạo ra dạng: https://link-landing.com/build/id-link</i>
+            <MainLayout>
+                <div className="container" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+                    <div className="col-md-6 col-12 content-form">
+                        <Form
+                            form={form}
+                            name="landing-generator"
+                            onFinish={onFinish}
+                            layout="vertical"
+                            className='form-landing'
+                            onValuesChange={handleFormChange}
+                        >
+                            <div className="item-form">
+                                <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
+                                <br />
+                                <i>Link sẽ được tạo ra dạng: https://link-landing.com/build/id-link</i>
+                                <hr />
+                                <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
+                                <br />
+                                <i style={{ cursor: 'pointer' }} onClick={() => navigator.clipboard.writeText('20023333388888')}>Số tài khoản: 20023333388888 (Click để copy)</i>
+                                <br />
+                                <i>Ngân hàng: Mb Bank</i>
+                                <br />
+                                <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
+                                <br />
+                                <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <b><a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a></b> !</i>
+                            </div>
                             <hr />
-                            <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
-                            <br />
-                            <i style={{ cursor: 'pointer' }} onClick={() => navigator.clipboard.writeText('20023333388888')}>Số tài khoản: 20023333388888 (Click để copy)</i>
-                            <br />
-                            <i>Ngân hàng: Mb Bank</i>
-                            <br />
-                            <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
-                            <br />
-                            <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <b><a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a></b> !</i>
-                        </div>
-                        <hr />
-                        <div className="item-form">
-                            <Form.Item
-                                name="title"
-                                label="Tiêu đề"
-                                rules={[{ required: true, message: 'Vui lòng nhập tiêu đề!' }]}
-                            >
-                                <Input placeholder="Nhập tiêu đề trang web..." />
-                            </Form.Item>
-                            <i>Tiêu đề sẽ hiển thị khi chia sẻ trang web</i>
-                        </div>
-
-                        <div className="item-form">
-                            <Form.Item
-                                name="description"
-                                label="Mô tả"
-                                rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
-                            >
-                                <TextArea
-                                    rows={4}
-                                    placeholder="Nhập mô tả trang web..."
-                                />
-                            </Form.Item>
-                            <i>Đoạn mô tả sẽ hiển thị khi chia sẻ trang web</i>
-                        </div>
-
-                        <div className="item-form">
-                            <Form.Item
-                                name="redirectUrl"
-                                label="URL Chuyển Hướng"
-                                rules={[
-                                    { required: true, message: 'Vui lòng nhập URL chuyển hướng!' },
-                                    { type: 'url', message: 'Vui lòng nhập một URL hợp lệ!' }
-                                ]}
-                            >
-                                <Input placeholder="https://example.com" />
-                            </Form.Item>
-                            <i>Url của trang web muốn chuyển hướng tới</i>
-                        </div>
-
-                        <div className="item-form">
-                            <Form.Item
-                                label="Ảnh meta"
-                                required
-                            >
-                                <Upload {...uploadProps}>
-                                    <Button icon={<UploadOutlined />}>Chọn Ảnh</Button>
-                                </Upload>
-                            </Form.Item>
-                            <i>Kích thước chuẩn là 1200x600px, kích thước tối đa là 5MB</i>
-                        </div>
-
-                        <div className="item-form-submit">
-                            <Form.Item>
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    loading={loading}
-                                    block
+                            <div className="item-form">
+                                <Form.Item
+                                    name="title"
+                                    label="Tiêu đề"
+                                    rules={[{ required: true, message: 'Vui lòng nhập tiêu đề!' }]}
                                 >
-                                    Tạo Landing
-                                </Button>
-                            </Form.Item>
-                        </div>
-                    </Form>
+                                    <Input placeholder="Nhập tiêu đề trang web..." />
+                                </Form.Item>
+                                <i>Tiêu đề sẽ hiển thị khi chia sẻ trang web</i>
+                            </div>
 
-                    {generatedUrl && (
-                        <LinkNotification url={generatedUrl} onClose={() => setGeneratedUrl(null)} />
-                    )}
-                </div>
+                            <div className="item-form">
+                                <Form.Item
+                                    name="description"
+                                    label="Mô tả"
+                                    rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
+                                >
+                                    <TextArea
+                                        rows={4}
+                                        placeholder="Nhập mô tả trang web..."
+                                    />
+                                </Form.Item>
+                                <i>Đoạn mô tả sẽ hiển thị khi chia sẻ trang web</i>
+                            </div>
 
-                {/* Preview Section */}
-                <div className="col-md-4 col-12">
-                    <div className="preview-section" style={{
-                        width: '100%',
-                        borderRadius: '8px',
-                        position: 'sticky',
-                        top: '20px',
-                        height: 'fit-content'
-                    }}>
-                        <h6 style={{ marginBottom: '16px', color: '#65676B', fontWeight: 600 }}>Preview trên Messenger</h6>
+                            <div className="item-form">
+                                <Form.Item
+                                    name="redirectUrl"
+                                    label="URL Chuyển Hướng"
+                                    rules={[
+                                        { required: true, message: 'Vui lòng nhập URL chuyển hướng!' },
+                                        { type: 'url', message: 'Vui lòng nhập một URL hợp lệ!' }
+                                    ]}
+                                >
+                                    <Input placeholder="https://example.com" />
+                                </Form.Item>
+                                <i>Url của trang web muốn chuyển hướng tới</i>
+                            </div>
 
-                        {/* Messenger Chat Preview */}
-                        <div style={{
-                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                            <div className="item-form">
+                                <Form.Item
+                                    label="Ảnh meta"
+                                    required
+                                >
+                                    <Upload {...uploadProps}>
+                                        <Button icon={<UploadOutlined />}>Chọn Ảnh</Button>
+                                    </Upload>
+                                </Form.Item>
+                                <i>Kích thước chuẩn là 1200x600px, kích thước tối đa là 5MB</i>
+                            </div>
+
+                            <div className="item-form-submit">
+                                <Form.Item>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                        loading={loading}
+                                        block
+                                    >
+                                        Tạo Landing
+                                    </Button>
+                                </Form.Item>
+                            </div>
+                        </Form>
+
+                        {generatedUrl && (
+                            <LinkNotification url={generatedUrl} onClose={() => setGeneratedUrl(null)} />
+                        )}
+                    </div>
+
+                    {/* Preview Section */}
+                    <div className="col-md-4 col-12">
+                        <div className="preview-section" style={{
+                            width: '100%',
                             borderRadius: '8px',
-                            padding: '12px',
-                            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                            paddingTop: "65px"
+                            position: 'sticky',
+                            top: '20px',
+                            height: 'fit-content'
                         }}>
-                            {/* Chat Messages Container */}
+                            <h6 style={{ marginBottom: '16px', color: '#65676B', fontWeight: 600 }}>Preview trên Messenger</h6>
+
+                            {/* Messenger Chat Preview */}
                             <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '2px'
+                                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                borderRadius: '8px',
+                                padding: '12px',
+                                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                                paddingTop: "65px"
                             }}>
-                                {/* Link Preview Message */}
+                                {/* Chat Messages Container */}
                                 <div style={{
-                                    alignSelf: 'flex-end',
-                                    maxWidth: '85%',
-                                    borderRadius: '18px',
-                                    padding: '8px',
-                                    marginBottom: '2px'
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '2px'
                                 }}>
-                                    {/* Link Preview Card */}
+                                    {/* Link Preview Message */}
                                     <div style={{
-                                        backgroundColor: 'white',
-                                        borderRadius: '12px',
-                                        overflow: 'hidden',
+                                        alignSelf: 'flex-end',
+                                        maxWidth: '85%',
+                                        borderRadius: '18px',
+                                        padding: '8px',
+                                        marginBottom: '2px'
                                     }}>
-                                        {previewData.imageUrl && (
-                                            <div style={{
-                                                width: '100%',
-                                                height: '150px',
-                                                overflow: 'hidden',
-                                                position: 'relative',
-                                                backgroundColor: '#F0F2F5'
-                                            }}>
-                                                <img
-                                                    src={previewData.imageUrl}
-                                                    alt="Preview"
-                                                    style={{
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        objectFit: 'cover'
-                                                    }}
-                                                />
-                                            </div>
-                                        )}
+                                        {/* Link Preview Card */}
                                         <div style={{
-                                            padding: '8px',
-                                            borderTop: previewData.imageUrl ? '1px solid #E4E6EB' : 'none'
+                                            backgroundColor: 'white',
+                                            borderRadius: '12px',
+                                            overflow: 'hidden',
                                         }}>
+                                            {previewData.imageUrl && (
+                                                <div style={{
+                                                    width: '100%',
+                                                    height: '150px',
+                                                    overflow: 'hidden',
+                                                    position: 'relative',
+                                                    backgroundColor: '#F0F2F5'
+                                                }}>
+                                                    <img
+                                                        src={previewData.imageUrl}
+                                                        alt="Preview"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            objectFit: 'cover'
+                                                        }}
+                                                    />
+                                                </div>
+                                            )}
                                             <div style={{
-                                                fontSize: '14px',
-                                                fontWeight: '500',
-                                                color: '#050505',
-                                                marginBottom: '4px',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                display: '-webkit-box',
-                                                WebkitLineClamp: 2,
-                                                WebkitBoxOrient: 'vertical',
-                                                lineHeight: '18px'
+                                                padding: '8px',
+                                                borderTop: previewData.imageUrl ? '1px solid #E4E6EB' : 'none'
                                             }}>
-                                                {previewData.title || 'Tiêu đề sẽ hiển thị ở đây'}
-                                            </div>
-                                            <div style={{
-                                                fontSize: '13px',
-                                                color: '#65676B',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                display: '-webkit-box',
-                                                WebkitLineClamp: 2,
-                                                WebkitBoxOrient: 'vertical',
-                                                lineHeight: '16px'
-                                            }}>
-                                                {previewData.description || 'Mô tả sẽ hiển thị ở đây'}
+                                                <div style={{
+                                                    fontSize: '14px',
+                                                    fontWeight: '500',
+                                                    color: '#050505',
+                                                    marginBottom: '4px',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                    display: '-webkit-box',
+                                                    WebkitLineClamp: 2,
+                                                    WebkitBoxOrient: 'vertical',
+                                                    lineHeight: '18px'
+                                                }}>
+                                                    {previewData.title || 'Tiêu đề sẽ hiển thị ở đây'}
+                                                </div>
+                                                <div style={{
+                                                    fontSize: '13px',
+                                                    color: '#65676B',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                    display: '-webkit-box',
+                                                    WebkitLineClamp: 2,
+                                                    WebkitBoxOrient: 'vertical',
+                                                    lineHeight: '16px'
+                                                }}>
+                                                    {previewData.description || 'Mô tả sẽ hiển thị ở đây'}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Seen Status */}
-                                <div style={{
-                                    alignSelf: 'flex-end',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '4px',
-                                    marginTop: '2px'
-                                }}>
+                                    {/* Seen Status */}
                                     <div style={{
-                                        width: '12px',
-                                        height: '12px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#0084ff',
+                                        alignSelf: 'flex-end',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center'
+                                        gap: '4px',
+                                        marginTop: '2px'
                                     }}>
-                                        <img
-                                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E"
-                                            alt="Seen"
-                                            style={{
-                                                width: '8px',
-                                                height: '8px'
-                                            }}
-                                        />
+                                        <div style={{
+                                            width: '12px',
+                                            height: '12px',
+                                            borderRadius: '50%',
+                                            backgroundColor: '#0084ff',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                            <img
+                                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E"
+                                                alt="Seen"
+                                                style={{
+                                                    width: '8px',
+                                                    height: '8px'
+                                                }}
+                                            />
+                                        </div>
+                                        <span style={{ fontSize: '11px', color: '#65676B' }}>Đã xem</span>
                                     </div>
-                                    <span style={{ fontSize: '11px', color: '#65676B' }}>Đã xem</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </MainLayout>
         </>
     );
 };
