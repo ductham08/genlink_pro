@@ -32,7 +32,19 @@ const Sidebar: React.FC = () => {
     ];
 
     return (
-        <Sider className="main-sider" >
+        <Sider 
+            theme='light' 
+            className="main-sider" 
+            style={{
+                height: '100vh',
+                overflow: 'auto',
+                position: 'fixed',
+                left: 0,
+                top: 0,
+                bottom: 0,
+                padding: "0 1.5rem"
+            }}
+        >
             <Menu
                 mode="inline"
                 selectedKeys={[location.pathname]}

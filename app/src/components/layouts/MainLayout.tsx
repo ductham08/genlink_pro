@@ -15,14 +15,16 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <Layout hasSider className='main-layout'>
             <Sidebar/>
             <Layout>
-                <Content className="main-content" style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-                    <div className="scrollable-content">
-                        {children}
-                    </div>
+                <Content className='main-content'>
+                    <Content className="main-content" style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                        <div className="scrollable-content">
+                            {children}
+                        </div>
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>
+                        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    </Footer>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
-                </Footer>
             </Layout>
         </Layout>
     );
