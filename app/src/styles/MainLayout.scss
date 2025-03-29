@@ -78,3 +78,117 @@
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .main-layout {
+        .main-content {
+            margin-left: 200px;
+        }
+        .main-sider {
+            width: 250px !important;
+            .sidebar-menu {
+                .ant-menu-item {
+                    padding-left: 8px !important;
+                    padding-right: 8px !important;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-layout {
+        .main-content {
+            margin-left: 0;
+            margin-top: 60px;
+            padding: 1rem;
+            height: calc(100vh - 60px);
+        }
+        .main-sider {
+            transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed;
+            width: 250px !important;
+            height: calc(100vh - 60px) !important;
+            top: 60px;
+            right: 0;
+            left: auto;
+            background: #f0f2f5;
+            padding: 1rem;
+            visibility: hidden;
+            
+            &.mobile-sidebar-open {
+                transform: translateX(0);
+                visibility: visible;
+                .sidebar-menu {
+                    width: 100%;
+                    height: 100%;
+                    background: #f0f2f5;
+                }
+            }
+
+            .sidebar-menu {
+                width: 100%;
+            }
+        }
+    }
+
+    .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: #f0f2f5;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: #f0f2f5;
+            border-radius: 8px;
+        }
+
+        .mobile-menu-button {
+            margin-left: auto;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+
+            &:hover {
+                background: #e6e6e6;
+            }
+        }
+    }
+}
+
+// Mobile menu overlay
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    @media screen and (max-width: 768px) {
+        &.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
