@@ -6,6 +6,7 @@ import {
     LinkOutlined,
     SettingOutlined
 } from '@ant-design/icons';
+import '../../styles/Sidebar.scss';
 
 const { Sider } = Layout;
 
@@ -23,11 +24,6 @@ const Sidebar: React.FC = () => {
             key: '/create-link',
             icon: <LinkOutlined />,
             label: 'Tạo Link'
-        },
-        {
-            key: '/settings',
-            icon: <SettingOutlined />,
-            label: 'Cài đặt'
         }
     ];
 
@@ -42,14 +38,19 @@ const Sidebar: React.FC = () => {
                 left: 0,
                 top: 0,
                 bottom: 0,
-                padding: "0 1.5rem"
+                padding: '1.5rem 1.5rem 1.5rem 2rem',
             }}
+            width={250}
         >
             <Menu
                 mode="inline"
                 selectedKeys={[location.pathname]}
                 items={menuItems}
                 onClick={({ key }) => navigate(key)}
+                style={{
+                    border: 'none',
+                }}
+                className="sidebar-menu"
             />
         </Sider>
     );

@@ -10,10 +10,7 @@ const connectDB = async () => {
         const dbUrl = process.env.DATABASE_URL;
         const dbUrlWithCorrectDB = dbUrl.includes('/genlink-database') ? dbUrl : `${dbUrl}/genlink-database`;
             
-        await mongoose.connect(dbUrlWithCorrectDB, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(dbUrlWithCorrectDB);
         console.log('Connected to MongoDB database:', mongoose.connection.db.databaseName);
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
