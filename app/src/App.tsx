@@ -15,6 +15,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
+            <Route path="/analytics" element={<CreateLink />} />
+            <Route path="/account" element={<CreateLink />} />
           </Route>
         </Routes>
       </div>

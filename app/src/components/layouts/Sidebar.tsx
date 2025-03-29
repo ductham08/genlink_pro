@@ -5,7 +5,11 @@ import {
     DashboardOutlined,
     LinkOutlined,
     MenuOutlined,
-    CloseOutlined
+    CloseOutlined,
+    AppstoreAddOutlined,
+    ContainerOutlined,
+    DotChartOutlined,
+    UserOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -31,13 +35,23 @@ const Sidebar: React.FC = () => {
     const menuItems = [
         {
             key: '/dashboard',
-            icon: <DashboardOutlined />,
+            icon: <AppstoreAddOutlined />,
             label: 'Dashboard'
         },
         {
             key: '/create-link',
-            icon: <LinkOutlined />,
+            icon: <ContainerOutlined />,
             label: 'Tạo Link'
+        },
+        {
+            key: '/analytics',
+            icon: <DotChartOutlined />,
+            label: 'Thống kê'
+        },
+        {
+            key: '/account',
+            icon: <UserOutlined />,
+            label: 'Tài khoản'
         }
     ];
 

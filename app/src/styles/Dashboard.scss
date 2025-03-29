@@ -1,0 +1,102 @@
+.dashboard {
+    .stats-grid {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        @media screen and (max-width: 1200px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .stat-card {
+        width: calc(100%/4 - 3rem/4);
+        background: white;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-content {
+            .stat-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span {
+                    color: #8c8c8c;
+                    font-size: 1rem;
+                }
+
+                .stat-icon {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg {
+                        font-size: 24px;
+                        color: white;
+                    }
+
+                    &.sales {
+                        background: #1890ff;
+                    }
+
+                    &.users {
+                        background: #52c41a;
+                    }
+
+                    &.clients {
+                        background: #722ed1;
+                    }
+
+                    &.orders {
+                        background: #fa8c16;
+                    }
+                }
+            }
+
+            .stat-info {
+                .desc{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: .5rem;
+                }
+
+                h2 {
+                    font-size: 1.75rem;
+                    font-weight: 600;
+                    margin: 0;
+                    margin-bottom: 0.5rem;
+                }
+
+                .change {
+                    font-size: 0.875rem;
+                    font-weight: 500;
+
+                    &.positive {
+                        color: #52c41a;
+                    }
+
+                    &.negative {
+                        color: #f5222d;
+                        background: rgba(245, 34, 45, 0.1);
+                    }
+                }
+            }
+        }
+    }
+}

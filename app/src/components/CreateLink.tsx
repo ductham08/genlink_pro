@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Upload, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Upload, message, Table } from 'antd';
+import { UploadOutlined, LinkOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import LinkNotification from './LinkNotification';
 import MainLayout from './layouts/MainLayout';
+import '../styles/CreateLink.scss';
 
 const { TextArea } = Input;
 
@@ -17,6 +18,62 @@ const CreateLink: React.FC = () => {
         description: '',
         imageUrl: '',
     });
+
+    // Mock data for recent links - replace with actual API call
+    const recentLinks = [
+        {
+            key: '1',
+            shortLink: 'https://short.link/abc123',
+            originalLink: 'https://example.com/very-long-original-link',
+            clicks: 156,
+            createdAt: '2024-03-20 15:30',
+        },
+        {
+            key: '2',
+            shortLink: 'https://short.link/def456',
+            originalLink: 'https://example.com/another-long-link',
+            clicks: 89,
+            createdAt: '2024-03-20 14:15',
+        },
+    ];
+
+    const columns = [
+        {
+            title: 'Link bọc',
+            dataIndex: 'shortLink',
+            key: 'shortLink',
+            render: (text: string) => (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <LinkOutlined style={{ color: '#1890ff' }} />
+                    <a href={text} target="_blank" rel="noopener noreferrer">
+                        {text}
+                    </a>
+                </div>
+            ),
+        },
+        {
+            title: 'Link gốc',
+            dataIndex: 'originalLink',
+            key: 'originalLink',
+            render: (text: string) => (
+                <div className="original-link-cell">
+                    <span>{text}</span>
+                </div>
+            ),
+        },
+        {
+            title: 'Lượt click',
+            dataIndex: 'clicks',
+            key: 'clicks',
+            width: 120,
+        },
+        {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            width: 180,
+        },
+    ];
 
     const onFinish = async (values: any) => {
         if (!imageFile) {
@@ -61,7 +118,6 @@ const CreateLink: React.FC = () => {
                 return false;
             }
             setImageFile(file);
-            // Create preview URL for the image
             const reader = new FileReader();
             reader.onload = (e) => {
                 setPreviewData(prev => ({
@@ -85,34 +141,21 @@ const CreateLink: React.FC = () => {
     };
 
     return (
-        <>
-            <MainLayout>
-                <div className="container" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-                    <div className="col-md-6 col-12 content-form">
+        <MainLayout>
+            <div className="create-link-page">
+                <div className="heading-page">
+                    <h5>Tạo link</h5>
+                </div>
+                <div className="content-wrapper">
+                    <div className="form-section">
                         <Form
                             form={form}
                             name="landing-generator"
                             onFinish={onFinish}
                             layout="vertical"
-                            className='form-landing'
+                            className="form-landing"
                             onValuesChange={handleFormChange}
                         >
-                            <div className="item-form">
-                                <i>Website tạo ra nhằm mục đích tạo ra một link có thể chuyển hướng tới link bất kỳ.</i>
-                                <br />
-                                <i>Link sẽ được tạo ra dạng: https://link-landing.com/build/id-link</i>
-                                <hr />
-                                <i>Anh em có lòng góp gạo lúa vui lòng gửi về số tài khoản sau:</i>
-                                <br />
-                                <i style={{ cursor: 'pointer' }} onClick={() => navigator.clipboard.writeText('20023333388888')}>Số tài khoản: 20023333388888 (Click để copy)</i>
-                                <br />
-                                <i>Ngân hàng: Mb Bank</i>
-                                <br />
-                                <i>Chủ tài khoản: Nguyễn Đức Thắm</i>
-                                <br />
-                                <i style={{ color: 'red' }}>* Do server có giới hạn nên anh em hạn chế tạo link quá nhiều, nếu có thắc mắc vui lòng liên hệ <b><a style={{ color: 'red', textDecoration: 'none' }} href="https://t.me/otis_cua" target="_blank" rel="noopener noreferrer">otis cua</a></b> !</i>
-                            </div>
-                            <hr />
                             <div className="item-form">
                                 <Form.Item
                                     name="title"
@@ -183,133 +226,53 @@ const CreateLink: React.FC = () => {
                         )}
                     </div>
 
-                    {/* Preview Section */}
-                    <div className="col-md-4 col-12">
-                        <div className="preview-section" style={{
-                            width: '100%',
-                            borderRadius: '8px',
-                            position: 'sticky',
-                            top: '20px',
-                            height: 'fit-content'
-                        }}>
-                            <h6 style={{ marginBottom: '16px', color: '#65676B', fontWeight: 600 }}>Preview trên Messenger</h6>
-
-                            {/* Messenger Chat Preview */}
-                            <div style={{
-                                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                                borderRadius: '8px',
-                                padding: '12px',
-                                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                                paddingTop: "65px"
-                            }}>
-                                {/* Chat Messages Container */}
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: '2px'
-                                }}>
-                                    {/* Link Preview Message */}
-                                    <div style={{
-                                        alignSelf: 'flex-end',
-                                        maxWidth: '85%',
-                                        borderRadius: '18px',
-                                        padding: '8px',
-                                        marginBottom: '2px'
-                                    }}>
-                                        {/* Link Preview Card */}
-                                        <div style={{
-                                            backgroundColor: 'white',
-                                            borderRadius: '12px',
-                                            overflow: 'hidden',
-                                        }}>
-                                            {previewData.imageUrl && (
-                                                <div style={{
-                                                    width: '100%',
-                                                    height: '150px',
-                                                    overflow: 'hidden',
-                                                    position: 'relative',
-                                                    backgroundColor: '#F0F2F5'
-                                                }}>
-                                                    <img
-                                                        src={previewData.imageUrl}
-                                                        alt="Preview"
-                                                        style={{
-                                                            width: '100%',
-                                                            height: '100%',
-                                                            objectFit: 'cover'
-                                                        }}
-                                                    />
-                                                </div>
-                                            )}
-                                            <div style={{
-                                                padding: '8px',
-                                                borderTop: previewData.imageUrl ? '1px solid #E4E6EB' : 'none'
-                                            }}>
-                                                <div style={{
-                                                    fontSize: '14px',
-                                                    fontWeight: '500',
-                                                    color: '#050505',
-                                                    marginBottom: '4px',
-                                                    overflow: 'hidden',
-                                                    textOverflow: 'ellipsis',
-                                                    display: '-webkit-box',
-                                                    WebkitLineClamp: 2,
-                                                    WebkitBoxOrient: 'vertical',
-                                                    lineHeight: '18px'
-                                                }}>
-                                                    {previewData.title || 'Tiêu đề sẽ hiển thị ở đây'}
-                                                </div>
-                                                <div style={{
-                                                    fontSize: '13px',
-                                                    color: '#65676B',
-                                                    overflow: 'hidden',
-                                                    textOverflow: 'ellipsis',
-                                                    display: '-webkit-box',
-                                                    WebkitLineClamp: 2,
-                                                    WebkitBoxOrient: 'vertical',
-                                                    lineHeight: '16px'
-                                                }}>
-                                                    {previewData.description || 'Mô tả sẽ hiển thị ở đây'}
-                                                </div>
+                    <div className="content-right">
+                        
+                        <div className="recent-links-section">
+                            <Table 
+                                dataSource={recentLinks} 
+                                columns={columns} 
+                                pagination={false}
+                                size="small"
+                                className="recent-links-table"
+                            />
+                        </div>
+                        <div className="preview-section col-md-3 col-12">
+                            <h6>Preview trên Messenger</h6>
+                            <div className="messenger-preview">
+                                <div className="message-container">
+                                    <div className="link-preview">
+                                        {previewData.imageUrl && (
+                                            <div className="preview-image">
+                                                <img src={previewData.imageUrl} alt="Preview" />
+                                            </div>
+                                        )}
+                                        <div className="preview-content">
+                                            <div className="preview-title">
+                                                {previewData.title || 'Tiêu đề sẽ hiển thị ở đây'}
+                                            </div>
+                                            <div className="preview-description">
+                                                {previewData.description || 'Mô tả sẽ hiển thị ở đây'}
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Seen Status */}
-                                    <div style={{
-                                        alignSelf: 'flex-end',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '4px',
-                                        marginTop: '2px'
-                                    }}>
-                                        <div style={{
-                                            width: '12px',
-                                            height: '12px',
-                                            borderRadius: '50%',
-                                            backgroundColor: '#0084ff',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
+                                    <div className="seen-status">
+                                        <div className="seen-icon">
                                             <img
                                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E"
                                                 alt="Seen"
-                                                style={{
-                                                    width: '8px',
-                                                    height: '8px'
-                                                }}
                                             />
                                         </div>
-                                        <span style={{ fontSize: '11px', color: '#65676B' }}>Đã xem</span>
+                                        <span>Đã xem</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </MainLayout>
-        </>
+            </div>
+        </MainLayout>
     );
 };
 

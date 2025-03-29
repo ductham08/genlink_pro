@@ -1,0 +1,126 @@
+// Base styles for Ant Design inputs
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-number,
+.ant-picker,
+.ant-select-selector,
+.ant-input-search,
+.ant-input-password,
+textarea.ant-input {
+    height: 42px !important;
+    border-radius: 6px !important;
+    border-color: #f0f2f5 !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    transition: none !important;
+
+    // Remove all hover and focus states
+    &:hover,
+    &:focus,
+    &:active,
+    &-focused {
+        border-color: #f0f2f5 !important;
+        box-shadow: none !important;
+    }
+}
+
+// Base styles for Ant Design buttons
+.ant-btn {
+    height: 45px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+
+    &.ant-btn-primary {
+        background: #1890ff !important;
+        color: white !important;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background: #1890ff !important;
+            opacity: 0.9;
+        }
+
+        .anticon {
+            background-color: #1890ff !important;
+            svg {
+                color: white !important;
+                fill: white !important;
+            }
+        }
+    }
+
+    &.ant-btn-default {
+        background: white !important;
+        border: 1px solid #e4e6eb !important;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background: white !important;
+            border-color: #e4e6eb !important;
+            opacity: 0.9;
+        }
+    }
+}
+
+// Special handling for textareas
+textarea.ant-input {
+    height: auto !important;
+    min-height: 45px !important;
+}
+
+// Handle input with prefix/suffix
+.ant-input-affix-wrapper {
+    padding: 0 11px;
+    
+    .ant-input {
+        height: 43px !important;
+        background-color: transparent !important;
+    }
+}
+
+// Handle Select component
+.ant-select {
+    .ant-select-selector {
+        height: 45px !important;
+        padding: 0 11px !important;
+        
+        .ant-select-selection-search-input {
+            height: 43px !important;
+        }
+        
+        .ant-select-selection-item {
+            line-height: 43px !important;
+        }
+    }
+}
+
+// Handle InputNumber component
+.ant-input-number {
+    width: 100% !important;
+    
+    .ant-input-number-input {
+        height: 43px !important;
+    }
+}
+
+// Handle DatePicker component
+.ant-picker {
+    width: 100% !important;
+    
+    .ant-picker-input > input {
+        height: 43px !important;
+    }
+}
+
+// Remove default background color change on autofill
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f0f2f5 inset !important;
+} 
