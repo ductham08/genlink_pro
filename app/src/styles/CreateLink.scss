@@ -1,14 +1,4 @@
 .create-link-page {
-    .heading-page {
-        margin-bottom: 2rem;
-
-        h5 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
-        }
-    }
-
     .content-wrapper {
         display: flex;
         gap: 2rem;
@@ -17,7 +7,7 @@
         .form-section {
             width: 35%;
             background: white;
-            border-radius: 12px;
+             border-radius: 8px;
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
@@ -46,7 +36,7 @@
             .preview-section {
                 width: 35%;
                 background: white;
-                border-radius: 12px;
+                 border-radius: 8px;
                 padding: 1.5rem;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
                 position: sticky;
@@ -69,7 +59,7 @@
                             align-self: flex-end;
                             max-width: 85%;
                             background: white;
-                            border-radius: 12px;
+                             border-radius: 8px;
                             overflow: hidden;
 
                             .preview-image {
@@ -202,7 +192,7 @@
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
                 padding: 1.5rem;
                 background-color: white;
-                border-radius: 12px;
+                 border-radius: 8px;
                 overflow: hidden;
             }
         }

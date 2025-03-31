@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
             label: 'Thống kê'
         },
         {
-            key: '/account',
+            key: '/profile',
             icon: <UserOutlined />,
             label: 'Tài khoản'
         }

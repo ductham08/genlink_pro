@@ -15,7 +15,7 @@ router.post('/api/register', async (req, res) => {
     }
 
     // Mã hóa mật khẩu
-    const hashedPassword = await bcrypt.hash(password, 100);
+    const hashedPassword = await bcrypt.hash(password, 20);
 
     // Tạo người dùng mới
     const newUser = new User({

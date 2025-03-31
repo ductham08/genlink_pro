@@ -4,6 +4,8 @@ import CreateLink from './components/CreateLink';
 import RegisterForm from './components/RegisterForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
+import Statistics from './components/Statistics';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -16,8 +18,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/create-link" element={<CreateLink />} />
-            <Route path="/analytics" element={<CreateLink />} />
-            <Route path="/account" element={<CreateLink />} />
+            <Route path="/analytics" element={<Statistics />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
       </div>
