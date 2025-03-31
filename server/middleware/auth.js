@@ -10,9 +10,9 @@ const authMiddleware = (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        if (decoded.role !== 'admin') {
-            return res.status(403).json({ message: 'Bạn không có quyền truy cập!' });
-        }
+        // if (decoded.role !== 'admin') {
+        //     return res.status(403).json({ message: 'Bạn không có quyền truy cập!' });
+        // }
 
         req.user = decoded;
         next();
