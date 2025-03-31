@@ -4,10 +4,25 @@
     min-height: 100vh;
     height: 100vh;
     overflow: hidden;
+    
+    * {
+        outline: none !important;
+    }
+    
     .main-sider {
         background: transparent;
+        
+        &:focus, &:focus-visible {
+            outline: none !important;
+        }
+        
         .sidebar-menu {
             background-color: transparent;
+            
+            &:focus, &:focus-visible {
+                outline: none !important;
+            }
+            
             .ant-menu-item {
                 margin: 8px 0;
                 height: 52px;
@@ -68,7 +83,16 @@
                 &::after {
                     display: none;
                 }
-    
+                
+                &:focus, &:focus-visible {
+                    outline: none !important;
+                }
+                
+                .anticon {
+                    &:focus, &:focus-visible {
+                        outline: none !important;
+                    }
+                }
             }
         }
     }

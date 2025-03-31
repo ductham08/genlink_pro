@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
 
     const menuItems = [
         {
-            key: '/dashboard',
+            key: '/',
             icon: <AppstoreAddOutlined />,
             label: 'Dashboard'
         },

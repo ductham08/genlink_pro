@@ -13,7 +13,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/create-link" element={<CreateLink />} />
             <Route path="/create-link" element={<CreateLink />} />
             <Route path="/analytics" element={<CreateLink />} />
             <Route path="/account" element={<CreateLink />} />
