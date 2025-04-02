@@ -18,10 +18,9 @@
         width: calc(100%/4 - 3rem/4);
         background: white;
         border-radius: 8px;
-        padding: 1rem;
+        padding: .5rem 1rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         transition: all 0.3s ease;
-
         &:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -38,20 +37,9 @@
                 }
 
                 .stat-icon {
-                    width: 48px;
-                    height: 48px;
-                     border-radius: 8px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
                     svg {
                         font-size: 24px;
-                        color: white;
-                    }
-
-                    &.sales {
-                        background: #1890ff;
+                        color: #1890ff;
                     }
 
                     &.users {
@@ -77,10 +65,10 @@
                 }
 
                 h2 {
-                    font-size: 1.75rem;
-                    font-weight: 600;
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: #1a1a1a;
                     margin: 0;
-                    margin-bottom: 0.5rem;
                 }
 
                 .change {
@@ -101,6 +89,90 @@
 
         @media (max-width: 768px) {
             width: 100%;
+        }
+    }
+}
+
+.content-chart {
+    .statistics-charts {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        width: 100%;
+        flex-wrap: wrap;
+
+        .chart-card {
+            width: calc(100%/2 - .5rem);
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .chart-header {
+                margin-bottom: 20px;
+
+                h2 {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin: 0;
+                }
+
+                .subtitle {
+                    color: #666;
+                    font-size: 14px;
+                    margin: 4px 0 0 0;
+                }
+            }
+
+            .chart-content {
+                height: 300px;
+                width: 100%;
+            }
+            
+            .chart-footer{
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                .item-chart{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    width: calc(100%/4 - 1rem/3);
+                    h2 {
+                        color: rgba(0, 0, 0, .85);
+                        font-weight: 600;
+                        font-size: 20px;
+                        line-height: 1.4;
+                        margin: 0;
+                    }
+    
+                    .subtitle {
+                        color: rgba(0, 0, 0, .65);
+                        font-weight: 600;
+                        font-size: 14px;
+                        margin: 0;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            @media (max-width: 768px) {
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Responsive styles
+@media (max-width: 1024px) {
+    .dashboard-container {
+        .statistics-charts {
+            grid-template-columns: 1fr;
         }
     }
 }
