@@ -2,32 +2,26 @@ import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { Link } from 'react-router-dom';
 import '../styles/LoginForm.scss';
+import { useLoginMutation } from '../app/slices/authenticate';
 
 const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
+    const [ login ] = useLoginMutation()
 
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                message.success(data.message);
-                sessionStorage.setItem('token', data.token);
+            const response = await login(values)
+            
+            if (response.data?.error_code === 200) {
+                message.success(response.data.message);
+                sessionStorage.setItem('token', response.data.token);
 
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 1500);
             } else {
-                const error = await response.json();
-                message.error(error.message);
+                message.error(response.data.message);
             }
         } catch (error) {
             message.error('Có lỗi xảy ra, vui lòng thử lại!');

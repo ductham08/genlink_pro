@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { Link } from 'react-router-dom';
 import '../styles/RegisterForm.scss';
+import { useRegisterMutation } from '../app/slices/authenticate';
 
 const RegisterForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -9,20 +10,13 @@ const RegisterForm: React.FC = () => {
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
+            const [ register ] = useRegisterMutation()
+            const response = await register(values)
 
-            if (response.ok) {
-                const data = await response.json();
-                message.success(data.message);
+            if (response.data?.error_code === 200) {
+                message.success(response.data.message);
             } else {
-                const error = await response.json();
-                message.error(error.message);
+                message.error(response.data.message);
             }
         } catch (error) {
             message.error('Có lỗi xảy ra, vui lòng thử lại!');

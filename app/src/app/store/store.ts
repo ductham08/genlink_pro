@@ -8,7 +8,10 @@ const store = configureStore({
     generateLinkApi: generateLinkApi.reducer,
   },
   middleware : (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(),
+    getDefaultMiddleware().concat(
+      authenticateApis.middleware,
+      generateLinkApi.middleware
+    ),
 });
 
 export type AppDispatch = typeof store.dispatch;
