@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Space, Button, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Table, Space, Button } from 'antd';
 import MainLayout from './layouts/MainLayout';
 import '../styles/Statistics.scss';
+import SearchBox from './common/SearchBox';
 
 interface LinkData {
     id: string;
@@ -26,14 +26,7 @@ const Statistics: React.FC = () => {
     const fetchLinks = async (page: number, pageSize: number) => {
         setLoading(true);
         try {
-            // TODO: Replace with actual API call
-            // const response = await fetch(`/api/links?page=${page}&pageSize=${pageSize}`);
-            // const data = await response.json();
-            // setLinks(data.links);
-            // setPagination({
-            //     ...pagination,
-            //     total: data.total
-            // });
+            
         } catch (error) {
             console.error('Error fetching links:', error);
         } finally {
@@ -109,14 +102,11 @@ const Statistics: React.FC = () => {
                     <h5>Thống kê</h5>
                 </div>
                 <div className="statistics-content">
-                    <div className="search-box">
-                        <Input
-                            placeholder="Tìm kiếm link..."
-                            prefix={<SearchOutlined />}
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                    </div>
+                    <SearchBox
+                        placeholder="Tìm kiếm link..."
+                        value={searchText}
+                        onChange={setSearchText}
+                    />
                     <Table
                         columns={columns}
                         dataSource={links}

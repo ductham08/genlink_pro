@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Dashboard.scss';
 import MainLayout from './layouts/MainLayout';
-import { DollarOutlined } from '@ant-design/icons';
+import { DollarOutlined} from '@ant-design/icons';
+import SearchBox from './common/SearchBox';
 
 const Dashboard: React.FC = () => {
+    const [searchText, setSearchText] = useState('');
+
     return (
         <MainLayout>
             <div className="dashboard">
@@ -11,6 +14,11 @@ const Dashboard: React.FC = () => {
                     <h5>Dashboard</h5>
                 </div>
                 <div className="dashboard-page">
+                    <SearchBox
+                        placeholder="Tìm kiếm link..."
+                        value={searchText}
+                        onChange={setSearchText}
+                    />
                     <div className="stats-grid">
                         <div className="stat-card col-md-3 col-6">
                             <div className="stat-content">

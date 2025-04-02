@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import CreateLink from './components/CreateLink';
 import RegisterForm from './components/RegisterForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
@@ -16,8 +15,6 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/create-link" element={<CreateLink />} />
-            <Route path="/create-link" element={<CreateLink />} />
             <Route path="/analytics" element={<Statistics />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

@@ -39,11 +39,6 @@ const Sidebar: React.FC = () => {
             label: 'Dashboard'
         },
         {
-            key: '/create-link',
-            icon: <ContainerOutlined />,
-            label: 'Tạo Link'
-        },
-        {
             key: '/analytics',
             icon: <DotChartOutlined />,
             label: 'Thống kê'

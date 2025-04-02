@@ -1,0 +1,14 @@
+
+.search-box {
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 1rem;
+    .ant-input-affix-wrapper {
+        border-radius: 8px;
+    }
+}
