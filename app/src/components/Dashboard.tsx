@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
         <MainLayout>
             <div className="dashboard">
                 <div className="heading-page">
-                    <h5>Dashboard</h5>
+                    <h5>Trang chủ</h5>
                 </div>
                 <div className="dashboard-page">
                     <SearchBox

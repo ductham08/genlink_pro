@@ -24,6 +24,13 @@ textarea.ant-input {
     }
 }
 
+.ant-input-password {
+    .ant-input {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
 // Base styles for Ant Design buttons
 .ant-btn {
     height: 35px !important;

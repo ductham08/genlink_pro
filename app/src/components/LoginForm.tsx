@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message, Modal } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Button, message } from 'antd';
 import { Link } from 'react-router-dom';
+import '../styles/LoginForm.scss';
 
 const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -37,50 +37,53 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <Modal
-            title="Đăng nhập"
-            open={true}
-            footer={null}
-            closable={false}
-            maskClosable={false}
-            width={450}
-            centered
-        >
-            <Form
-                name="normal_login"
-                className="login-form"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-            >
-                <Form.Item
-                    name="username"
-                    rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
-                >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Tên đăng nhập" />
-                </Form.Item>
+        <div className="login-container">
+            <div className="login-content">
+                <div className="login-form-section">
+                    <div className="login-form-content">
+                        <h1>Đăng nhập</h1>
+                        <p className="subtitle">Nhập tên đăng nhập và mật khẩu để đăng nhập hệ thống</p>
+                        
+                        <Form
+                            name="login_form"
+                            className="login-form"
+                            initialValues={{ remember: false }}
+                            onFinish={onFinish}
+                            layout="vertical"
+                        >
+                            <Form.Item
+                                label="Tên đăng nhập"
+                                name="username"
+                                rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
+                            >
+                                <Input placeholder="Tên đăng nhập" />
+                            </Form.Item>
 
-                <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
-                >
-                    <Input.Password
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="Mật khẩu"
-                    />
-                </Form.Item>
+                            <Form.Item
+                                label="Mật khẩu"
+                                name="password"
+                                rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                            >
+                                <Input.Password placeholder="Mật khẩu" />
+                            </Form.Item>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button" loading={loading} block>
-                        Đăng nhập
-                    </Button>
-                </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" loading={loading} block>
+                                    Đăng nhập
+                                </Button>
+                            </Form.Item>
 
-                <div style={{ textAlign: 'center' }}>
-                    Chưa có tài khoản? <Link to="/register" style={{textDecoration: 'none'}}>Đăng ký ngay</Link>
+                            <div className="signup-link">
+                                Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
+                            </div>
+                        </Form>
+                    </div>
                 </div>
-            </Form>
-        </Modal>
+                <div className="login-image-section">
+                    <img src="/images/bunny.jpg" alt="Bunny" />
+                </div>
+            </div>
+        </div>
     );
 };
 

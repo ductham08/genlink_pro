@@ -44,6 +44,9 @@ const Profile: React.FC = () => {
     return (
         <MainLayout>
             <div className="profile-page">
+                <div className="heading-page">
+                    <h5>Tài khoản</h5>
+                </div>
                 <div className="profile-content">
                     <div className="settings-section">
                         <div className="section-card">
