@@ -4,10 +4,10 @@ import { generateLinkApi } from "../slices/link";
 
 const store = configureStore({
   reducer: {
-    authenticateApis: authenticateApis.reducer,
-    generateLinkApi: generateLinkApi.reducer,
+    [authenticateApis.reducerPath]: authenticateApis.reducer,
+    [generateLinkApi.reducerPath]: generateLinkApi.reducer,
   },
-  middleware : (getDefaultMiddleware) =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authenticateApis.middleware,
       generateLinkApi.middleware
