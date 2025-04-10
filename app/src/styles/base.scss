@@ -1,13 +1,31 @@
 // Base styles for Ant Design inputs
 .ant-input,
-.ant-input-affix-wrapper,
 .ant-input-number,
 .ant-picker,
 .ant-select-selector,
 .ant-input-search,
-.ant-input-password,
-textarea.ant-input {
-    height: 37px !important;
+.ant-input-password{
+    &:not(textarea){
+        height: 37px !important;
+        border-radius: 6px !important;
+        border-color: #f0f2f5 !important;
+        background-color: white !important;
+        box-shadow: none !important;
+        transition: none !important;
+
+        // Remove all hover and focus states
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus-visible,
+        &:focus-within {
+            border-color: #f0f2f5 !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+.ant-input-affix-wrapper{
     border-radius: 6px !important;
     border-color: #f0f2f5 !important;
     background-color: white !important;
@@ -18,7 +36,25 @@ textarea.ant-input {
     &:hover,
     &:focus,
     &:active,
-    &-focused {
+    &:focus-visible,
+    &:focus-within {
+        border-color: #f0f2f5 !important;
+        box-shadow: none !important;
+    }
+}
+
+textarea{
+    border-radius: 6px !important;
+    border-color: #f0f2f5 !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    transition: none !important;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:focus-visible,
+    &:focus-within {
         border-color: #f0f2f5 !important;
         box-shadow: none !important;
     }
@@ -74,19 +110,15 @@ textarea.ant-input {
     }
 }
 
-// Special handling for textareas
-textarea.ant-input {
-    height: auto !important;
-    min-height: 37px !important;
-}
-
 // Handle input with prefix/suffix
 .ant-input-affix-wrapper {
     padding: 0 11px;
     
     .ant-input {
-        height: 35px !important;
-        background-color: transparent !important;
+        &:not(textarea){
+            height: 35px !important;
+            background-color: transparent !important;
+        }
     }
 }
 
@@ -131,3 +163,15 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #f0f2f5 inset !important;
 } 
+
+.ant-form {
+    .item-form{
+        margin-bottom: .75rem;
+        .ant-form-item-label{
+            font-weight: 600;
+        }
+        .ant-form-item {
+            margin-bottom: 0;
+        }
+    }
+}

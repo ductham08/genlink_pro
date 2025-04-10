@@ -5,6 +5,13 @@ export const authenticateApis = createApi({
     reducerPath: "authenticate",
     baseQuery: fetchBaseQuery({
         baseUrl: '/',
+        prepareHeaders: (headers) => {
+            const token = sessionStorage.getItem('token');
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
     tagTypes: ['authenticate'],
     endpoints: (builder) => ({

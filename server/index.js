@@ -35,6 +35,10 @@ app.get('/build/:id', (req, res) => {
     const landingPath = path.join(__dirname, 'build', req.params.id, 'index.html');
     res.sendFile(landingPath);
 });
+app.get('/build/:id/*', (req, res) => {
+    const imageFile = path.join(__dirname, 'build', req.params.id, req.params[0]);
+    res.sendFile(imageFile);
+});
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

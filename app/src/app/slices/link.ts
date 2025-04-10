@@ -1,11 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const generateLinkApi = createApi({
-    reducerPath: "generate-landing",
+    reducerPath: "generateLink",
     baseQuery: fetchBaseQuery({
         baseUrl: '/',
+        prepareHeaders: (headers) => {
+            const token = sessionStorage.getItem('token');
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
-    tagTypes: ['generate-landing'],
+    tagTypes: ['generateLink'],
     endpoints: (builder) => ({
         generateLanding: builder.mutation<any, any>({
             query(data) {
@@ -15,7 +22,7 @@ export const generateLinkApi = createApi({
                     body: data
                 }
             },
-            invalidatesTags: ['generate-landing']
+            invalidatesTags: ['generateLink']
         })
     })
 })

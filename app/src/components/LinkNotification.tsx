@@ -56,7 +56,6 @@ const LinkNotification: React.FC<LinkNotificationProps> = ({ url, onClose }) => 
         ]}
       >
         <Paragraph><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></Paragraph>
-        <i style={{ color: 'red', fontSize: '13px' }}>* Link sẽ không lưu lại trên hệ thống, anh em vui lòng tự lưu lại để sử dụng và nhớ kiểm tra link trước khi làm để tránh phí nguyên liệu</i>
       </Modal>
     </div>
   );

@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/LoginForm.scss';
 import { useLoginMutation } from '../app/slices/authenticate';
 
 const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
-    const [ login ] = useLoginMutation()
+    const [login] = useLoginMutation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
-            const response = await login(values)
+            const response = await login(values).unwrap();
             
-            if (response.data?.error_code === 200) {
-                message.success(response.data.message);
-                sessionStorage.setItem('token', response.data.token);
-
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
+            if (response.token) {
+                message.success('Đăng nhập thành công!');
+                sessionStorage.setItem('token', response.token);
+                navigate('/');
             } else {
-                message.error(response.data.message);
+                message.error(response.message || 'Đăng nhập thất bại!');
             }
-        } catch (error) {
-            message.error('Có lỗi xảy ra, vui lòng thử lại!');
+        } catch (error: any) {
+            message.error(error.data?.message || 'Có lỗi xảy ra, vui lòng thử lại!');
         } finally {
             setLoading(false);
         }
