@@ -1,17 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { customBaseQuery } from "./customBaseQuery";
 
 export const generateLinkApi = createApi({
     reducerPath: "generateLink",
-    baseQuery: fetchBaseQuery({
-        baseUrl: '/',
-        prepareHeaders: (headers) => {
-            const token = sessionStorage.getItem('token');
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+    baseQuery: customBaseQuery,
     tagTypes: ['generateLink'],
     endpoints: (builder) => ({
         generateLanding: builder.mutation<any, any>({
