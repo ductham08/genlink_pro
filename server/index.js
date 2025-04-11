@@ -6,7 +6,9 @@ import generateLandingRouter from './apis/generate-landing.js';
 import authRouter from './apis/auth.js';
 import registerRouter from './apis/register.js';
 import trackVisitRouter from './apis/track-visit.js';
+import linksRouter from './apis/links.js';
 import connectDB from './database.js';
+import authenticateToken from './middleware/authenticate.js';
 import { fileURLToPath } from 'url';
 
 // Load environment variables from .env file
@@ -25,10 +27,14 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
 app.use(cors());
 
-app.use(generateLandingRouter);
+// Public routes
 app.use(authRouter);
 app.use(registerRouter);
-app.use(trackVisitRouter);
+
+// Protected routes
+app.use('/api/generate-landing', authenticateToken, generateLandingRouter);
+app.use('/api/track-visit', authenticateToken, trackVisitRouter);
+app.use('/api/links', authenticateToken, linksRouter);
 
 // Handle clean URLs for landing pages
 app.get('/build/:id', (req, res) => {
