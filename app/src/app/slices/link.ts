@@ -4,7 +4,7 @@ import { customBaseQuery } from "./customBaseQuery";
 export const generateLinkApi = createApi({
     reducerPath: "generateLink",
     baseQuery: customBaseQuery,
-    tagTypes: ['generateLink'],
+    tagTypes: ['generateLink', 'links'],
     endpoints: (builder) => ({
         generateLanding: builder.mutation<any, any>({
             query(data) {
@@ -15,8 +15,15 @@ export const generateLinkApi = createApi({
                 }
             },
             invalidatesTags: ['generateLink']
+        }),
+        getLinks: builder.query<any, void>({
+            query: () => ({
+                url: '/api/links',
+                method: 'GET'
+            }),
+            providesTags: ['links']
         })
     })
 })
 
-export const { useGenerateLandingMutation } = generateLinkApi
+export const { useGenerateLandingMutation, useGetLinksQuery } = generateLinkApi

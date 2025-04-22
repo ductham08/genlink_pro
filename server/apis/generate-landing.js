@@ -173,7 +173,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
 
         // Lưu link vào cơ sở dữ liệu
         const newLink = new Link({
-            username: user.username,
+            userId: user._id,
             plan: plan.type,
             createdAt: new Date(),
             url: generatedUrl,

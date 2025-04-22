@@ -3,46 +3,31 @@ import { Table, Space, Button } from 'antd';
 import MainLayout from './layouts/MainLayout';
 import '../styles/Statistics.scss';
 import SearchBox from './common/SearchBox';
+import { useGetLinksQuery } from '../app/slices/link';
 
 interface LinkData {
-    id: string;
-    originalUrl: string;
-    wrappedUrl: string;
+    _id: string;
+    redirectUrl: string;
+    url: string;
     createdAt: string;
-    clickCount: number;
+    clicks: number;
 }
 
 const Statistics: React.FC = () => {
-    const [links, setLinks] = useState<LinkData[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [searchText, setSearchText] = useState('');
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
         total: 0
     });
-    const [searchText, setSearchText] = useState('');
 
-    // Fetch links data
-    const fetchLinks = async (page: number, pageSize: number) => {
-        setLoading(true);
-        try {
-            
-        } catch (error) {
-            console.error('Error fetching links:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchLinks(pagination.current, pagination.pageSize);
-    }, [pagination.current, pagination.pageSize]);
-
+    const { data: linksData, isLoading } = useGetLinksQuery();
+    
     const columns = [
         {
             title: 'Link gốc',
-            dataIndex: 'originalUrl',
-            key: 'originalUrl',
+            dataIndex: 'redirectUrl',
+            key: 'redirectUrl',
             render: (text: string) => (
                 <a href={text} target="_blank" rel="noopener noreferrer">
                     {text}
@@ -51,8 +36,8 @@ const Statistics: React.FC = () => {
         },
         {
             title: 'Link bọc',
-            dataIndex: 'wrappedUrl',
-            key: 'wrappedUrl',
+            dataIndex: 'url',
+            key: 'url',
             render: (text: string) => (
                 <a href={text} target="_blank" rel="noopener noreferrer">
                     {text}
@@ -67,16 +52,15 @@ const Statistics: React.FC = () => {
         },
         {
             title: 'Số lượt click',
-            dataIndex: 'clickCount',
-            key: 'clickCount',
-            sorter: (a: LinkData, b: LinkData) => a.clickCount - b.clickCount
+            dataIndex: 'clicks',
+            key: 'clicks',
         },
         {
             title: 'Thao tác',
             key: 'action',
             render: (_: any, record: LinkData) => (
                 <Space size="middle">
-                    <Button type="link" onClick={() => window.open(record.wrappedUrl, '_blank')}>
+                    <Button type="link" onClick={() => window.open(record.url, '_blank')}>
                         Mở
                     </Button>
                     <Button type="link" danger>
@@ -109,10 +93,13 @@ const Statistics: React.FC = () => {
                     />
                     <Table
                         columns={columns}
-                        dataSource={links}
-                        rowKey="id"
-                        pagination={pagination}
-                        loading={loading}
+                        dataSource={linksData?.data}
+                        rowKey="_id"
+                        pagination={{
+                            ...pagination,
+                            total: linksData?.data?.length || 0
+                        }}
+                        loading={isLoading}
                         onChange={handleTableChange}
                     />
                 </div>

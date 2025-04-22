@@ -8,7 +8,6 @@ import registerRouter from './apis/register.js';
 import trackVisitRouter from './apis/track-visit.js';
 import linksRouter from './apis/links.js';
 import connectDB from './database.js';
-import authenticateToken from './middleware/authenticate.js';
 import { fileURLToPath } from 'url';
 
 // Load environment variables from .env file
