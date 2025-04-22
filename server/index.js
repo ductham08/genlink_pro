@@ -30,11 +30,9 @@ app.use(cors());
 // Public routes
 app.use(authRouter);
 app.use(registerRouter);
-
-// Protected routes
-app.use('/api/generate-landing', authenticateToken, generateLandingRouter);
-app.use('/api/track-visit', authenticateToken, trackVisitRouter);
-app.use('/api/links', authenticateToken, linksRouter);
+app.use(generateLandingRouter);
+app.use(trackVisitRouter);
+app.use(linksRouter);
 
 // Handle clean URLs for landing pages
 app.get('/build/:id', (req, res) => {

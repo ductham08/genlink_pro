@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import authMiddleware from '../middleware/auth.js';
 import User from '../models/user.js';
 import Link from '../models/link.js';
+import authenticateToken from '../middleware/authenticate.js';
 
 dotenv.config();
 
@@ -22,10 +23,7 @@ const upload = multer({ dest: '/build/' });
 const port = process.env.PORT || 3000;
 const domain = process.env.LANDING_DOMAIN || `http://localhost:${port}`;
 
-console.log(domain);
-
-
-router.post('/api/generate-landing', authMiddleware, upload.single('image'), async (req, res) => {
+router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.single('image'), async (req, res) => {
     try {
         const { title, description, redirectUrl } = req.body;
 
