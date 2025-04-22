@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Line } from '@ant-design/plots';
 import '../styles/Dashboard.scss';
 import MainLayout from './layouts/MainLayout';
