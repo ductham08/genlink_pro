@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Table, Space, Button } from 'antd';
+import React, { useState } from 'react';
+import { Table, Space, Button, Modal, message } from 'antd';
 import MainLayout from './layouts/MainLayout';
 import '../styles/Statistics.scss';
 import SearchBox from './common/SearchBox';
-import { useGetLinksQuery } from '../app/slices/link';
+import { useGetLinksQuery, useDeleteLinkMutation } from '../app/slices/link';
 
 interface LinkData {
     _id: string;
@@ -20,9 +20,30 @@ const Statistics: React.FC = () => {
         pageSize: 10,
         total: 0
     });
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [selectedLink, setSelectedLink] = useState<LinkData | null>(null);
 
     const { data: linksData, isLoading } = useGetLinksQuery();
-    
+    const [deleteLink] = useDeleteLinkMutation();
+
+    const handleDelete = async () => {
+        if (!selectedLink) return;
+
+        try {
+            await deleteLink(selectedLink._id).unwrap();
+            message.success('Xóa link thành công!');
+            setDeleteModalVisible(false);
+            setSelectedLink(null);
+        } catch (error: any) {
+            message.error(error.data?.message || 'Có lỗi xảy ra khi xóa link!');
+        }
+    };
+
+    const showDeleteModal = (record: LinkData) => {
+        setSelectedLink(record);
+        setDeleteModalVisible(true);
+    };
+
     const columns = [
         {
             title: 'Link gốc',
@@ -63,7 +84,7 @@ const Statistics: React.FC = () => {
                     <Button type="link" onClick={() => window.open(record.url, '_blank')}>
                         Mở
                     </Button>
-                    <Button type="link" danger>
+                    <Button type="link" danger onClick={() => showDeleteModal(record)}>
                         Xóa
                     </Button>
                 </Space>
@@ -104,6 +125,21 @@ const Statistics: React.FC = () => {
                     />
                 </div>
             </div>
+
+            <Modal
+                title="Xác nhận xóa"
+                open={deleteModalVisible}
+                onOk={handleDelete}
+                onCancel={() => {
+                    setDeleteModalVisible(false);
+                    setSelectedLink(null);
+                }}
+                okText="Xóa"
+                cancelText="Hủy"
+                okButtonProps={{ danger: true }}
+            >
+                <p>Bạn có chắc chắn muốn xóa link này?</p>
+            </Modal>
         </MainLayout>
     );
 };

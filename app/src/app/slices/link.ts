@@ -22,8 +22,17 @@ export const generateLinkApi = createApi({
                 method: 'GET'
             }),
             providesTags: ['links']
+        }),
+        deleteLink: builder.mutation<any, string>({
+            query(id) {
+                return {
+                    url: `/api/links/${id}`,
+                    method: 'DELETE'
+                }
+            },
+            invalidatesTags: ['links']
         })
     })
 })
 
-export const { useGenerateLandingMutation, useGetLinksQuery } = generateLinkApi
+export const { useGenerateLandingMutation, useGetLinksQuery, useDeleteLinkMutation } = generateLinkApi

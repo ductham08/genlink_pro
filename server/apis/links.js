@@ -55,4 +55,31 @@ router.get('/api/links/:id', authMiddleware, async (req, res) => {
     }
 });
 
+router.delete('/api/links/:id', authMiddleware, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.userId;
+
+        const link = await Link.findOneAndDelete({ _id: id, userId });
+
+        if (!link) {
+            return res.status(404).json({
+                message: 'Không tìm thấy link!',
+                error_code: 1006
+            });
+        }
+
+        res.json({
+            message: 'Xóa link thành công!',
+            error_code: 200
+        });
+    } catch (error) {
+        console.error('Error deleting link:', error);
+        res.status(500).json({
+            message: 'Có lỗi xảy ra khi xóa link!',
+            error_code: 503
+        });
+    }
+});
+
 export default router; 
