@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-    DashboardOutlined,
-    LinkOutlined,
     MenuOutlined,
     CloseOutlined,
     AppstoreAddOutlined,
-    ContainerOutlined,
     DotChartOutlined,
-    UserOutlined
+    UserOutlined,
+    LogoutOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -32,6 +30,11 @@ const Sidebar: React.FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const handleLogout = () => {
+        sessionStorage.clear();
+        navigate('/login');
+    };
+
     const menuItems = [
         {
             key: '/',
@@ -50,6 +53,14 @@ const Sidebar: React.FC = () => {
         }
     ];
 
+    const menuActions = [
+        {
+            key: '/logout',
+            icon: <LogoutOutlined />,
+            label: 'Đăng xuất'
+        }
+    ];
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -64,14 +75,14 @@ const Sidebar: React.FC = () => {
                             {isMobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
                         </button>
                     </div>
-                    <div 
+                    <div
                         className={`mobile-menu-overlay ${isMobileMenuOpen ? 'visible' : ''}`}
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
                 </>
             )}
-            <Sider 
-                theme='light' 
+            <Sider
+                theme='light'
                 className={`main-sider ${isMobileMenuOpen ? 'mobile-sidebar-open' : ''}`}
                 style={{
                     height: isMobile ? 'calc(100vh - 60px)' : '100vh',
@@ -91,22 +102,45 @@ const Sidebar: React.FC = () => {
                 }}
                 width={isMobile ? 250 : 250}
             >
-                <Menu
-                    mode="inline"
-                    selectedKeys={[location.pathname]}
-                    items={menuItems}
-                    onClick={({ key }) => {
-                        navigate(key);
-                        if (isMobile) {
-                            setIsMobileMenuOpen(false);
-                        }
-                    }}
+                <div
                     style={{
-                        border: 'none',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
                         height: '100%'
                     }}
-                    className="sidebar-menu"
-                />
+                >
+                    <Menu
+                        mode="inline"
+                        selectedKeys={[location.pathname]}
+                        items={menuItems}
+                        onClick={({ key }) => {
+                            navigate(key);
+                            if (isMobile) {
+                                setIsMobileMenuOpen(false);
+                            }
+                        }}
+                        style={{
+                            border: 'none',
+                        }}
+                        className="sidebar-menu"
+                    />
+                    <Menu
+                        mode="inline"
+                        selectedKeys={[location.pathname]}
+                        items={menuActions}
+                        onClick={({ key }) => {
+                            handleLogout();
+                            if (isMobile) {
+                                setIsMobileMenuOpen(false);
+                            }
+                        }}
+                        style={{
+                            border: 'none',
+                        }}
+                        className="sidebar-menu"
+                    />
+                </div>
             </Sider>
         </>
     );
