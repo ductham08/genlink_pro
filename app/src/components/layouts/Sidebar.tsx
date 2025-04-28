@@ -129,7 +129,7 @@ const Sidebar: React.FC = () => {
                         mode="inline"
                         selectedKeys={[location.pathname]}
                         items={menuActions}
-                        onClick={({ key }) => {
+                        onClick={() => {
                             handleLogout();
                             if (isMobile) {
                                 setIsMobileMenuOpen(false);

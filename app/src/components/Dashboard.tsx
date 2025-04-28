@@ -110,8 +110,7 @@ const Dashboard: React.FC = () => {
                                     <div className="stat-info">
                                         <span>Số link đã tạo</span>
                                         <div className="desc">
-                                            <h2>16</h2>
-                                            <span className="change positive">+30%</span>
+                                            <h2>16/30</h2>
                                         </div>
                                     </div>
                                     <div className="stat-icon sales">
@@ -124,46 +123,14 @@ const Dashboard: React.FC = () => {
                             <div className="stat-content">
                                 <div className="stat-header">
                                     <div className="stat-info">
-                                        <span>Link tạo trong ngày</span>
+                                        <span>Số lượng còn lại</span>
                                         <div className="desc">
                                             <h2>16</h2>
-                                            <span className="change positive">+30%</span>
+                                            {/* <span className="change positive">+30%</span> */}
                                         </div>
                                     </div>
                                     <div className="stat-icon sales">
                                         <BlockOutlined />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="stat-card col-md-3 col-6">
-                            <div className="stat-content">
-                                <div className="stat-header">
-                                    <div className="stat-info">
-                                        <span>Số lượt click</span>
-                                        <div className="desc">
-                                            <h2>16</h2>
-                                            <span className="change positive">+30%</span>
-                                        </div>
-                                    </div>
-                                    <div className="stat-icon sales">
-                                        <TeamOutlined />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="stat-card col-md-3 col-6">
-                            <div className="stat-content">
-                                <div className="stat-header">
-                                    <div className="stat-info">
-                                        <span>Lượt tạo link còn lại</span>
-                                        <div className="desc">
-                                            <h2>16</h2>
-                                            <span className="change positive">+30%</span>
-                                        </div>
-                                    </div>
-                                    <div className="stat-icon sales">
-                                        <ProductOutlined />
                                     </div>
                                 </div>
                             </div>

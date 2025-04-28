@@ -60,15 +60,13 @@
                 .desc{
                     display: flex;
                     justify-content: flex-start;
-                    align-items: center;
-                    gap: .5rem;
-                }
-
-                h2 {
-                    font-size: 22px;
-                    font-weight: 700;
-                    color: #1a1a1a;
-                    margin: 0;
+                    align-items: flex-end;
+                    h2 {
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: #1a1a1a;
+                        margin: 0;
+                    }
                 }
 
                 .change {
