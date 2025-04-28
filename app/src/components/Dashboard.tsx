@@ -31,32 +31,10 @@ const Dashboard: React.FC = () => {
                                 <div className="stat-content">
                                     <div className="stat-icon ">
                                         <BarChartOutlined />
-                                        <span>Đã dùng</span>
+                                        <span>Gói hiện có</span>
                                     </div>
                                     <div className="desc">
                                         <h2>{user?.plan.usedLinks}/{user?.plan.totalLinks}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-content">
-                                    <div className="stat-icon ">
-                                        <LineChartOutlined />
-                                        <span>Còn lại</span>
-                                    </div>
-                                    <div className="desc">
-                                        <h2>{(user?.plan?.totalLinks || 0) - (user?.plan?.usedLinks || 0)}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-content">
-                                    <div className="stat-icon ">
-                                        <UserOutlined />
-                                        <span>Gói hiện tại</span>
-                                    </div>
-                                    <div className="desc">
-                                        <h2 style={{ textTransform: 'capitalize' }}>{isLoadingUser ? 'Loading...' : user?.plan.type}</h2>
                                     </div>
                                 </div>
                             </div>

@@ -1,14 +1,16 @@
+@use './variables' as vars;
+
 .login-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: vars.$dask-bg-layout;
     padding: 20px;
 
     .login-content {
         display: flex;
-        background: white;
+        background: vars.$dask-bg-card;
         border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -31,18 +33,18 @@
                     font-size: 32px;
                     font-weight: 700;
                     margin-bottom: 8px;
-                    color: #1a1a1a;
+                    color: vars.$dask-text-primary;
                 }
 
                 .subtitle {
-                    color: #666;
+                    color: vars.$dask-text-secondary;
                     margin-bottom: 15px;
                 }
 
                 .login-form {
                     .ant-form-item-label {
                         label {
-                            color: #1a1a1a;
+                            color: vars.$dask-text-primary;
                             font-weight: 500;
                         }
                     }
@@ -50,10 +52,10 @@
                     .ant-input, .ant-input-password {
                         height: 45px;
                         border-radius: 8px;
-                        border: 1px solid #e6e6e6;
+                        border: 1px solid vars.$dask-border-color;
 
                         &:focus, &:hover {
-                            border-color: #1890ff;
+                            border-color: vars.$dask-info;
                             box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
                         }
                     }
@@ -62,7 +64,7 @@
                         display: flex;
                         align-items: center;
                         gap: 8px;
-                        color: #666;
+                        color: vars.$dask-text-secondary;
                     }
 
                     .ant-btn {
@@ -74,10 +76,10 @@
 
                     .signup-link {
                         text-align: center;
-                        color: #666;
+                        color: vars.$dask-text-secondary;
 
                         a {
-                            color: #1890ff;
+                            color: vars.$dask-info;
                             font-weight: 500;
                             margin-left: 4px;
                             text-decoration: none;
@@ -93,7 +95,7 @@
 
         .login-image-section {
             flex: 1;
-            background: #f8f8f8;
+            background: vars.$dask-bg-card;
             display: flex;
             align-items: center;
             justify-content: center;

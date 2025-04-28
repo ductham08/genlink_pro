@@ -40,7 +40,7 @@
                     display: inline-flex;
                     width: 32px;
                     height: 32px;
-                    background-color: #fff;
+                    background-color: vars.$dask-button-secondary-text;
                     box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
                     border-radius: 6px;
                     justify-content: center;
@@ -48,9 +48,8 @@
                     margin-right: 10px;
                     vertical-align: middle;
                     svg {
-                        color: #1890ff;
-                        color: #141414;
-                        fill: #141414;
+                        color: vars.$dask-button-primary-text;
+                        fill: vars.$dask-button-primary-text;
                     }
                 }
 
@@ -66,20 +65,20 @@
                 &.ant-menu-item-selected{
                     transition: all 0.3s ease;
                     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-                    background-color: vars.$dask-button-primary-bg;
+                    background-color: vars.$dask-bg-card;
                     * {
-                        color: black;
+                        color: vars.$dask-button-primary-text;
                         font-weight: 600;
                     }
                     .anticon {
-                        background-color: vars.$dask-button-secondary-text;
+                        background-color: vars.$dask-button-primary-text;
                         svg {
-                            color: vars.$dask-button-primary-text;
-                            fill: vars.$dask-button-primary-text;
+                            color: vars.$dask-button-primary-bg;
+                            fill: vars.$dask-button-primary-bg;
                         }
                     }
                     &:hover {
-                        background-color: vars.$dask-button-primary-bg !important;
+                        background-color: vars.$dask-bg-card !important;
                     }
 
                     span {
@@ -150,7 +149,7 @@
             top: 60px;
             right: 0;
             left: auto;
-            background: #f0f2f5;
+            background: vars.$dask-bg-layout;
             padding: 1rem;
             visibility: hidden;
             
@@ -160,7 +159,7 @@
                 .sidebar-menu {
                     width: 100%;
                     height: 100%;
-                    background: #f0f2f5;
+                    background: vars.$dask-bg-layout;
                 }
             }
 
@@ -176,7 +175,7 @@
         left: 0;
         right: 0;
         height: 60px;
-        background: #f0f2f5;
+        background: vars.$dask-bg-layout;
         display: flex;
         align-items: center;
         padding: 0 1rem;
@@ -186,7 +185,7 @@
         .logo-placeholder {
             width: 40px;
             height: 40px;
-            background: #f0f2f5;
+            background: vars.$dask-bg-layout;
             border-radius: 8px;
         }
 
@@ -203,7 +202,7 @@
             cursor: pointer;
 
             &:hover {
-                background: #e6e6e6;
+                background: vars.$dask-bg-layout;
             }
         }
     }

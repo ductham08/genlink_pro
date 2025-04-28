@@ -1,13 +1,15 @@
-.dashboard {
+@use './variables' as vars;
 
+.dashboard {
     .content-dashboard {
         display: flex;
         align-items: flex-start;
         justify-content: space-around;
+        flex-wrap: wrap;
         gap: 1rem;
 
         .stats-grid {
-            width: calc(40% - .5rem);
+            width: calc(20% - .5rem);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -21,11 +23,11 @@
             }
 
             .stat-card {
-                width: calc(100%/3 - 0.5rem);
-                background: white;
+                width: 100%;
+                background: vars.$dask-bg-card;
                 border-radius: 8px;
                 padding: 1rem 1rem;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                box-shadow: 0 2px 8px vars.$dask-box-shadow;
                 transition: all 0.3s ease;
 
                 &:hover {
@@ -46,13 +48,13 @@
                         gap: .5rem;
 
                         span {
-                            color: #8c8c8c;
+                            color: vars.$dask-text-primary;
                             font-size: 1rem;
                         }
 
                         svg {
                             font-size: 20px;
-                            color: #1890ff;
+                            color: vars.$dask-button-primary-bg;
                         }
 
                     }
@@ -65,20 +67,26 @@
                         h2 {
                             font-size: 19px;
                             font-weight: 500;
-                            color: #1a1a1a;
+                            color: vars.$dask-text-primary;
                             margin: 0;
                         }
                     }
                 }
 
                 @media (max-width: 768px) {
-                    width: 100%;
+                    width: calc(50% - .5rem);
                 }
             }
+            @media (max-width: 768px) {
+                width: 100%;
+            }
         }
-
+        
         .links-data {
-            width: calc(60% - .5rem);
+            width: calc(80% - .5rem);
+            @media (max-width: 768px) {
+                width: 100%;
+            }
         }
     }
 }

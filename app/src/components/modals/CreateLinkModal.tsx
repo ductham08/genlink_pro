@@ -3,6 +3,7 @@ import { Form, Input, Button, Upload, message, Modal, Image } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import LinkNotification from '../LinkNotification';
 import { useGenerateLandingMutation } from '../../app/slices/link';
+import '../../styles/CreateLink.scss';
 
 const { TextArea } = Input;
 

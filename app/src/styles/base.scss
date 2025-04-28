@@ -1,3 +1,5 @@
+@use './variables' as vars;
+
 // Base styles for Ant Design inputs
 .ant-input,
 .ant-input-number,
@@ -8,10 +10,11 @@
     &:not(textarea){
         height: 37px !important;
         border-radius: 6px !important;
-        border-color: #f0f2f5 !important;
-        background-color: white !important;
+        border-color: vars.$dask-input-border !important;
+        background-color: vars.$dask-input-bg !important;
         box-shadow: none !important;
         transition: none !important;
+        color: vars.$dask-input-text !important;
 
         // Remove all hover and focus states
         &:hover,
@@ -19,16 +22,44 @@
         &:active,
         &:focus-visible,
         &:focus-within {
-            border-color: #f0f2f5 !important;
+            border-color: vars.$dask-input-border !important;
             box-shadow: none !important;
         }
+
+        &::placeholder{
+            color: vars.$dask-input-placeholder !important;
+        }
+    }
+
+}
+
+.item-form{
+    .ant-form-item{
+        label{
+            color: vars.$dask-text-primary !important;
+        }
+    }
+    i{
+        color: vars.$dask-text-primary !important;
+    }
+}
+
+.ant-input-affix-wrapper{
+    overflow: hidden;
+    svg {
+        color: vars.$dask-input-text !important;
+        fill: vars.$dask-input-text !important;
+    }
+
+    input::placeholder{
+        color: vars.$dask-input-placeholder !important;
     }
 }
 
 .ant-input-affix-wrapper{
     border-radius: 6px !important;
-    border-color: #f0f2f5 !important;
-    background-color: white !important;
+    border-color: vars.$dask-input-border !important;
+    background-color: vars.$dask-input-bg !important;
     box-shadow: none !important;
     transition: none !important;
 
@@ -38,15 +69,15 @@
     &:active,
     &:focus-visible,
     &:focus-within {
-        border-color: #f0f2f5 !important;
+        border-color: vars.$dask-input-border !important;
         box-shadow: none !important;
     }
 }
 
 textarea{
     border-radius: 6px !important;
-    border-color: #f0f2f5 !important;
-    background-color: white !important;
+    border-color: vars.$dask-input-border !important;
+    background-color: vars.$dask-input-bg !important;
     box-shadow: none !important;
     transition: none !important;
 
@@ -55,8 +86,12 @@ textarea{
     &:active,
     &:focus-visible,
     &:focus-within {
-        border-color: #f0f2f5 !important;
+        border-color: vars.$dask-input-border !important;
         box-shadow: none !important;
+    }
+
+    &::placeholder{
+        color: vars.$dask-input-placeholder !important;
     }
 }
 
@@ -77,34 +112,34 @@ textarea{
     transition: all 0.3s ease !important;
 
     &.ant-btn-primary {
-        background: #1890ff !important;
-        color: white !important;
+        background: vars.$dask-button-primary-bg !important;
+        color: vars.$dask-button-primary-text !important;
 
         &:hover,
         &:focus,
         &:active {
-            background: #1890ff !important;
+            background: vars.$dask-button-primary-bg !important;
             opacity: 0.9;
         }
 
         .anticon {
-            background-color: #1890ff !important;
+            background-color: transparent !important;
             svg {
-                color: white !important;
-                fill: white !important;
+                color: vars.$dask-button-primary-text !important;
+                fill: vars.$dask-button-primary-text !important;
             }
         }
     }
 
     &.ant-btn-default {
-        background: white !important;
-        border: 1px solid #e4e6eb !important;
+        background: vars.$dask-input-bg !important;
+        border: 1px solid vars.$dask-input-border !important;
 
         &:hover,
         &:focus,
         &:active {
-            background: white !important;
-            border-color: #e4e6eb !important;
+            background: vars.$dask-input-bg !important;
+            border-color: vars.$dask-input-border !important;
             opacity: 0.9;
         }
     }
@@ -161,7 +196,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #f0f2f5 inset !important;
+    -webkit-box-shadow: 0 0 0 30px vars.$dask-input-border inset !important;
 } 
 
 .ant-form {
@@ -172,6 +207,105 @@ input:-webkit-autofill:active {
         }
         .ant-form-item {
             margin-bottom: 0;
+        }
+    }
+}
+
+*::-webkit-scrollbar{
+    display: none;
+}
+
+.links-data {
+    width: 100%;
+    overflow-x: auto;
+
+    .ant-table-wrapper {
+        background: vars.$dask-bg-card !important;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        .ant-table {
+            background: transparent;
+            color: vars.$dask-text-primary !important;
+
+            .ant-table-thead>tr>th {
+                background: transparent;
+                font-weight: 600;
+                font-size: 13px;
+                padding: 12px 8px;
+                border-bottom: 1px solid vars.$dask-border-color;
+
+                &:nth-child(1) {
+                    width: 25%;
+                }
+
+                &:nth-child(2) {
+                    width: 25%;
+                }
+
+                &:nth-child(3) {
+                    width: 15%;
+                }
+
+                &:nth-child(4) {
+                    width: 15%;
+                }
+
+                &:nth-child(5) {
+                    width: 20%;
+                }
+            }
+
+            .ant-table-thead>tr>th{
+                color: vars.$dask-text-primary !important;
+            }
+
+            .ant-table-tbody>tr>td {
+                font-size: 13px;
+                padding: 5px 8px;
+                border-bottom: 1px solid vars.$dask-border-color;
+                color: vars.$dask-text-primary !important;
+
+                &:nth-child(1),
+                &:nth-child(2) {
+                    max-width: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    a {
+                        display: block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        text-decoration: none;
+                        color: vars.$dask-info;
+                    }
+                }
+            }
+
+            tr:hover>td {
+                background: vars.$dask-bg-hover !important;
+                color: vars.$dask-text-primary !important;
+            }
+
+            a {
+                color: vars.$dask-text-primary !important;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .ant-btn-link {
+                padding: 0;
+                height: auto;
+                color: vars.$dask-text-primary !important;
+            }
+        }
+
+        .ant-pagination {
+            margin-top: 1rem;
         }
     }
 }

@@ -20,6 +20,7 @@ interface LinksDataProps {
     };
     onPaginationChange?: (pagination: any) => void;
     showActions?: boolean;
+    hideActionsOnMobile?: boolean;
 }
 
 const LinksData: React.FC<LinksDataProps> = ({ 
@@ -27,7 +28,8 @@ const LinksData: React.FC<LinksDataProps> = ({
     loading, 
     pagination, 
     onPaginationChange,
-    showActions = true 
+    showActions = true,
+    hideActionsOnMobile = false
 }) => {
     const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
     const [selectedLink, setSelectedLink] = React.useState<LinkData | null>(null);
@@ -100,10 +102,13 @@ const LinksData: React.FC<LinksDataProps> = ({
     ];
 
     return (
-        <>
+        <div className={`links-data ${hideActionsOnMobile ? 'hide-actions-mobile' : ''}`}>
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={data.map(item => ({
+                    ...item,
+                    'data-label': columns.find(col => col.dataIndex === item._id)?.title
+                }))}
                 rowKey="_id"
                 pagination={pagination ? pagination : false}
                 loading={loading}
@@ -124,7 +129,7 @@ const LinksData: React.FC<LinksDataProps> = ({
             >
                 <p>Bạn có chắc chắn muốn xóa link này?</p>
             </Modal>
-        </>
+        </div>
     );
 };
 

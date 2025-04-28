@@ -46,11 +46,11 @@ const Sidebar: React.FC = () => {
             icon: <DotChartOutlined />,
             label: 'Thống kê'
         },
-        {
-            key: '/profile',
-            icon: <UserOutlined />,
-            label: 'Tài khoản'
-        }
+        // {
+        //     key: '/profile',
+        //     icon: <UserOutlined />,
+        //     label: 'Tài khoản'
+        // }
     ];
 
     const menuActions = [
