@@ -16,10 +16,11 @@ export const generateLinkApi = createApi({
             },
             invalidatesTags: ['generateLink']
         }),
-        getLinks: builder.query<any, void>({
-            query: () => ({
+        getLinks: builder.query<any, { limit?: number }>({
+            query: ({ limit }) => ({
                 url: '/api/links',
-                method: 'GET'
+                method: 'GET',
+                params: { limit }
             }),
             providesTags: ['links']
         }),

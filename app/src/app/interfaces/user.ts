@@ -5,7 +5,12 @@ export interface User {
     username: string;
     password: string;
     role: string;
-    plan: object;
+    plan: {
+        type: string;
+        usedLinks: number;
+        totalLinks: number;
+        registeredAt: Date
+    };
     createdAt: Date;
     updatedAt: Date;
 }

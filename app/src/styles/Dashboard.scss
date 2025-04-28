@@ -1,172 +1,88 @@
 .dashboard {
-    .stats-grid {
-        width: 100%;
+
+    .content-dashboard {
         display: flex;
-        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-around;
         gap: 1rem;
 
-        @media screen and (max-width: 1200px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .stats-grid {
+            width: calc(40% - .5rem);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
 
-        @media screen and (max-width: 576px) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .stat-card {
-        width: calc(100%/4 - 3rem/4);
-        background: white;
-        border-radius: 8px;
-        padding: .5rem 1rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        transition: all 0.3s ease;
-        &:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-content {
-            .stat-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                span {
-                    color: #8c8c8c;
-                    font-size: 1rem;
-                }
-
-                .stat-icon {
-                    svg {
-                        font-size: 24px;
-                        color: #1890ff;
-                    }
-
-                    &.users {
-                        background: #52c41a;
-                    }
-
-                    &.clients {
-                        background: #722ed1;
-                    }
-
-                    &.orders {
-                        background: #fa8c16;
-                    }
-                }
+            @media screen and (max-width: 1200px) {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .stat-info {
-                .desc{
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: flex-end;
-                    h2 {
-                        font-size: 20px;
-                        font-weight: 500;
-                        color: #1a1a1a;
-                        margin: 0;
-                    }
-                }
-
-                .change {
-                    font-size: 0.875rem;
-                    font-weight: 500;
-
-                    &.positive {
-                        color: #52c41a;
-                    }
-
-                    &.negative {
-                        color: #f5222d;
-                        background: rgba(245, 34, 45, 0.1);
-                    }
-                }
-            }
-        }
-
-        @media (max-width: 768px) {
-            width: 100%;
-        }
-    }
-}
-
-.content-chart {
-    .statistics-charts {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-        width: 100%;
-        flex-wrap: wrap;
-
-        .chart-card {
-            width: calc(100%/2 - .5rem);
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-            .chart-header {
-                margin-bottom: 20px;
-
-                h2 {
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: #1a1a1a;
-                    margin: 0;
-                }
-
-                .subtitle {
-                    color: #666;
-                    font-size: 14px;
-                    margin: 4px 0 0 0;
-                }
+            @media screen and (max-width: 576px) {
+                grid-template-columns: 1fr;
             }
 
-            .chart-content {
-                height: 300px;
-                width: 100%;
-            }
-            
-            .chart-footer{
-                display: flex;
-                align-items: flex-end;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                gap: 1rem;
+            .stat-card {
+                width: calc(100%/3 - 0.5rem);
+                background: white;
+                border-radius: 8px;
+                padding: 1rem 1rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                transition: all 0.3s ease;
 
-                .item-chart{
+                &:hover {
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                }
+
+                .stat-content {
                     display: flex;
                     flex-direction: column;
+                    justify-content: space-between;
                     align-items: flex-start;
-                    justify-content: center;
-                    width: calc(100%/4 - 1rem/3);
-                    h2 {
-                        color: rgba(0, 0, 0, .85);
-                        font-weight: 600;
-                        font-size: 20px;
-                        line-height: 1.4;
-                        margin: 0;
+                    gap: .75rem;
+
+                    .stat-icon {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: .5rem;
+
+                        span {
+                            color: #8c8c8c;
+                            font-size: 1rem;
+                        }
+
+                        svg {
+                            font-size: 20px;
+                            color: #1890ff;
+                        }
+
                     }
-    
-                    .subtitle {
-                        color: rgba(0, 0, 0, .65);
-                        font-weight: 600;
-                        font-size: 14px;
-                        margin: 0;
-                        text-transform: capitalize;
+
+                    .desc {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: flex-end;
+
+                        h2 {
+                            font-size: 19px;
+                            font-weight: 500;
+                            color: #1a1a1a;
+                            margin: 0;
+                        }
                     }
                 }
-            }
 
-            @media (max-width: 768px) {
-                width: 100%;
+                @media (max-width: 768px) {
+                    width: 100%;
+                }
             }
+        }
+
+        .links-data {
+            width: calc(60% - .5rem);
         }
     }
 }
 
-// Responsive styles
 @media (max-width: 1024px) {
     .dashboard-container {
         .statistics-charts {

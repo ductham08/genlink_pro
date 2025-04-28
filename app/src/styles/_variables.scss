@@ -1,0 +1,66 @@
+// Layout Background
+$dask-bg-layout: #121212;
+$dask-bg-card: #1e1e1e;
+$dask-bg-header: #1a1a1a;
+$dask-bg-footer: #1a1a1a;
+$dask-bg-hover: #2a2a2a;
+
+// Text Colors
+$dask-text-primary: #ffffff;
+$dask-text-secondary: #b0b0b0;
+$dask-text-disabled: #666666;
+
+// Border Colors
+$dask-border-color: #333333;
+
+// State Colors
+$dask-success: #4caf50;
+$dask-warning: #ff9800;
+$dask-error: #f44336;
+$dask-info: #2196f3;
+
+// Button Colors
+$dask-button-primary-bg: #727272;
+$dask-button-primary-text: #ffffff;
+$dask-button-secondary-bg: #424242;
+$dask-button-secondary-text: #bdbdbd;
+
+// Input Colors
+$dask-input-bg: #1e1e1e;
+$dask-input-border: #424242;
+$dask-input-text: #ffffff;
+$dask-input-placeholder: #888888;
+
+// Shadow
+$dask-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+// Others
+$dask-divider: #2c2c2c;
+$dask-disabled-bg: #2b2b2b;
+$dask-disabled-text: #777777;
+
+// Overlay (e.g., modal background)
+$dask-overlay-bg: rgba(0, 0, 0, 0.7);
+
+// Focus Color (input, button focus border or shadow)
+$dask-focus-color: #2979ff;
+
+// Active state (e.g., active tab, active button)
+$dask-active-bg: #333333;
+$dask-active-text: #ffffff;
+
+// Skeleton Loading Placeholder
+$dask-skeleton-bg: #2a2a2a;
+
+// Scrollbar Colors
+$dask-scrollbar-bg: #333333;
+$dask-scrollbar-thumb: #555555;
+$dask-scrollbar-thumb-hover: #777777;
+
+// Tooltip / Popover
+$dask-tooltip-bg: #2b2b2b;
+$dask-tooltip-text: #ffffff;
+
+// Notification Colors
+$dask-notification-bg: #1f1f1f;
+$dask-notification-border: #333333;
