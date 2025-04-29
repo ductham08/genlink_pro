@@ -310,6 +310,12 @@ input:-webkit-autofill:active {
     }
 }
 
+.ant-upload{
+    span{
+        color: vars.$dask-text-primary !important;
+    }
+}
+
 // Pagination styles
 .ant-pagination {
     .ant-pagination-item,
