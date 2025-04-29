@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
     role: { type: String, required: true, default: 'user' },
     plan: {
         type: { type: String, default: 'basic' },
-        totalLinks: { type: Number, default: 10 }, // Số lần được phép tạo link
-        usedLinks: { type: Number, default: 0 }, // Số lần đã tạo link
+        totalLinks: { type: Number, default: 70 },
+        usedLinks: { type: Number, default: 0 },
         registeredAt: { type: Date, default: Date.now }
     },
     createdAt: { type: Date, default: Date.now },
