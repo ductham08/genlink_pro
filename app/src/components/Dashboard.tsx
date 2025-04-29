@@ -31,10 +31,10 @@ const Dashboard: React.FC = () => {
                                 <div className="stat-content">
                                     <div className="stat-icon ">
                                         <BarChartOutlined />
-                                        <span>Gói hiện có</span>
+                                        <span>Đã sử dụng</span>
                                     </div>
                                     <div className="desc">
-                                        <h2>{user?.plan.usedLinks}/{user?.plan.totalLinks}</h2>
+                                        <h2>{user?.plan.usedLinks}/{user?.plan.totalLinks}</h2> 
                                     </div>
                                 </div>
                             </div>

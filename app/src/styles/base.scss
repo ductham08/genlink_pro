@@ -381,3 +381,9 @@ input:-webkit-autofill:active {
         color: vars.$dask-button-primary-text !important;
     }
 }
+
+.ant-modal-body{
+    p{
+        color: vars.$dask-warning !important;
+    }
+}

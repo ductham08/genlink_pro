@@ -1,7 +1,7 @@
-import React from 'react';
-import { Table, Space, Button, Modal, message } from 'antd';
-import { useDeleteLinkMutation } from '../../app/slices/link';
-import { LinkOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Table, Space, Button, Modal, message, Input } from 'antd';
+import { useDeleteLinkMutation, useEditLinkMutation } from '../../app/slices/link';
+import { LinkOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../../styles/LinksData.scss';
 
 interface LinkData {
@@ -33,9 +33,12 @@ const LinksData: React.FC<LinksDataProps> = ({
     showActions = true,
     hideActionsOnMobile = false
 }) => {
-    const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
-    const [selectedLink, setSelectedLink] = React.useState<LinkData | null>(null);
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [editModalVisible, setEditModalVisible] = useState(false);
+    const [selectedLink, setSelectedLink] = useState<LinkData | null>(null);
+    const [newSuffix, setNewSuffix] = useState('');
     const [deleteLink] = useDeleteLinkMutation();
+    const [editLink] = useEditLinkMutation();
 
     const handleDelete = async () => {
         if (!selectedLink) return;
@@ -50,9 +53,29 @@ const LinksData: React.FC<LinksDataProps> = ({
         }
     };
 
+    const handleEdit = async () => {
+        if (!selectedLink || !newSuffix) return;
+
+        try {
+            await editLink({ id: selectedLink._id, customSuffix: newSuffix }).unwrap();
+            message.success('Cập nhật link thành công!');
+            setEditModalVisible(false);
+            setSelectedLink(null);
+            setNewSuffix('');
+        } catch (error: any) {
+            message.error(error.data?.message || 'Có lỗi xảy ra khi cập nhật link!');
+        }
+    };
+
     const showDeleteModal = (record: LinkData) => {
         setSelectedLink(record);
         setDeleteModalVisible(true);
+    };
+
+    const showEditModal = (record: LinkData) => {
+        setSelectedLink(record);
+        setNewSuffix(record.url.split('/').pop() || '');
+        setEditModalVisible(true);
     };
 
     const handleCopyLink = (text: string) => {
@@ -124,12 +147,17 @@ const LinksData: React.FC<LinksDataProps> = ({
             key: 'action',
             render: (_: any, record: LinkData) => (
                 <Space size="middle">
-                    <Button type="link" onClick={() => window.open(record.url, '_blank')}>
-                        Mở
-                    </Button>
-                    <Button type="link" danger onClick={() => showDeleteModal(record)}>
-                        Xóa
-                    </Button>
+                    <Button 
+                        type="link" 
+                        icon={<EditOutlined />} 
+                        onClick={() => showEditModal(record)}
+                        />
+                    <Button 
+                        type="link" 
+                        icon={<DeleteOutlined />} 
+                        danger 
+                        onClick={() => showDeleteModal(record)}
+                    />
                 </Space>
             )
         }] : [])
@@ -162,6 +190,28 @@ const LinksData: React.FC<LinksDataProps> = ({
                 okButtonProps={{ danger: true }}
             >
                 <p>Bạn có chắc chắn muốn xóa link này?</p>
+            </Modal>
+
+            <Modal
+                title="Chỉnh sửa đuôi link"
+                open={editModalVisible}
+                onOk={handleEdit}
+                onCancel={() => {
+                    setEditModalVisible(false);
+                    setSelectedLink(null);
+                    setNewSuffix('');
+                }}
+                okText="Cập nhật"
+                cancelText="Hủy"
+            >
+                <Input
+                    value={newSuffix}
+                    onChange={(e) => setNewSuffix(e.target.value)}
+                    placeholder="Nhập đuôi link mới"
+                />
+                <p style={{ marginTop: 8, color: '#666' }}>
+                    Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-20 ký tự
+                </p>
             </Modal>
         </div>
     );
