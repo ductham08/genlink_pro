@@ -80,6 +80,7 @@ textarea{
     background-color: vars.$dask-input-bg !important;
     box-shadow: none !important;
     transition: none !important;
+    color: vars.$dask-input-text !important;
 
     &:hover,
     &:focus,
@@ -372,5 +373,11 @@ input:-webkit-autofill:active {
             border: 1px solid vars.$dask-input-border !important;
             background: vars.$dask-input-bg !important;
         }
+    }
+}
+
+.ant-btn{
+    span{
+        color: vars.$dask-button-primary-text !important;
     }
 }
