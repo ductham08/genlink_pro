@@ -25,7 +25,7 @@ const domain = process.env.LANDING_DOMAIN || `http://localhost:${port}`;
 
 router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.single('image'), async (req, res) => {
     try {
-        const { title, description, redirectUrl } = req.body;
+        const { title, description, redirectUrl, customSuffix } = req.body;
 
         // Lấy thông tin người dùng từ token
         const userId = req.user.userId;
@@ -55,7 +55,29 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
             return result;
         };
 
-        const landingId = generateShortId();
+        // Validate custom suffix if provided
+        let landingId;
+        if (customSuffix) {
+            // Check if suffix contains only alphanumeric characters and hyphens, and is between 4-20 characters
+            if (!/^[a-zA-Z0-9-]{4,20}$/.test(customSuffix)) {
+                return res.status(400).json({ 
+                    message: 'Suffix phải chứa từ 4-20 ký tự chữ, số và dấu gạch ngang (-)!' 
+                });
+            }
+            
+            // Check if suffix is already used
+            const existingLink = await Link.findOne({ url: { $regex: customSuffix } });
+            if (existingLink) {
+                return res.status(400).json({ 
+                    message: 'Suffix này đã được sử dụng! Vui lòng chọn suffix khác.' 
+                });
+            }
+            
+            landingId = customSuffix;
+        } else {
+            landingId = generateShortId();
+        }
+
         const generatedUrl = `${domain}/build/${landingId}`;
 
         // Create directory for this landing page

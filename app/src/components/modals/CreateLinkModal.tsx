@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Upload, message, Modal, Image } from 'antd';
+import { Form, Input, Button, Upload, message, Modal, Image, Switch } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import LinkNotification from '../LinkNotification';
 import { useGenerateLandingMutation } from '../../app/slices/link';
@@ -18,6 +18,7 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [generatedUrl, setGeneratedUrl] = useState<string | null>(null);
+    const [useCustomSuffix, setUseCustomSuffix] = useState(false);
 
     const [generateLanding] = useGenerateLandingMutation();
 
@@ -34,6 +35,9 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
             formData.append('description', values.description);
             formData.append('redirectUrl', values.redirectUrl);
             formData.append('image', imageFile);
+            if (values.customSuffix) {
+                formData.append('customSuffix', values.customSuffix);
+            }
 
             const response = await generateLanding(formData).unwrap();
 
@@ -116,6 +120,44 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
                                 <Input allowClear placeholder="https://example.com" />
                             </Form.Item>
                         </div>
+
+                        <div className="item-form">
+                            <Form.Item
+                                label="Custom suffix"
+                            >
+                                <Switch 
+                                    checked={useCustomSuffix}
+                                    onChange={(checked) => {
+                                        setUseCustomSuffix(checked);
+                                        if (!checked) {
+                                            form.setFieldValue('customSuffix', '');
+                                        }
+                                    }}
+                                />
+                            </Form.Item>
+                        </div>
+
+                        {useCustomSuffix && (
+                            <div className="item-form">
+                                <Form.Item
+                                    name="customSuffix"
+                                    label="Custom suffix"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập suffix!'
+                                        },
+                                        {
+                                            pattern: /^[a-zA-Z0-9-]{4,20}$/,
+                                            message: 'Sunffix chỉ được chứa chữ, số và dấu gạch ngang (-), từ 4-20 ký tự!'
+                                        }
+                                    ]}
+                                >
+                                    <Input allowClear placeholder="Nhập suffix tùy chỉnh..." />
+                                </Form.Item>
+                                <i>Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-20 ký tự</i>
+                            </div>
+                        )}
 
                         <div className="item-form">
                             <Form.Item
