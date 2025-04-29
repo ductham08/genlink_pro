@@ -3,7 +3,6 @@ import Link from '../models/link.js';
 
 const router = express.Router();
 
-// API để lấy số lượt truy cập của một link
 router.get('/api/visits/:id', async (req, res) => {
     try {
         const linkId = req.params.id;
@@ -24,7 +23,6 @@ router.get('/api/visits/:id', async (req, res) => {
     }
 });
 
-// API để tăng số lượt truy cập của một link
 router.post('/api/visits/:id', async (req, res) => {
     try {
         const linkId = req.params.id;

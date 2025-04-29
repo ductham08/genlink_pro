@@ -78,7 +78,8 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
             landingId = generateShortId();
         }
 
-        const generatedUrl = `${domain}/build/${landingId}`;
+        // Generate URL in short format
+        const generatedUrl = `${domain}/${landingId}`;
 
         // Create directory for this landing page
         const landingDir = path.join(__dirname, '../build', landingId);
@@ -101,12 +102,12 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         <meta name="description" content="${description}">
         <meta property="og:title" content="${title}">
         <meta property="og:description" content="${description}">
-        <meta property="og:image" content="./${landingId}/${imageFileName}">
+        <meta property="og:image" content="./${imageFileName}">
         <meta property="og:image:type" content="image/${imageExtension.slice(1)}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="${title}">
         <meta name="twitter:description" content="${description}">
-        <meta name="twitter:image" content="./${landingId}/${imageFileName}">
+        <meta name="twitter:image" content="./${imageFileName}">
         <script>
             async function trackVisit() {
                 try {
@@ -182,7 +183,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
     <body>
         <div id="content" style="display: none">
             <h1>${title}</h1>
-            <img src="./${landingId}/${imageFileName}" alt="${title}" width="100%">
+            <img src="./${imageFileName}" alt="${title}" width="100%">
             <p>${description}</p>
         </div>
     </body>
@@ -210,7 +211,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
 
         res.json({
             url: generatedUrl,
-            imageUrl: `${domain}/build/${landingId}/${imageFileName}`
+            imageUrl: `${domain}/${landingId}/${imageFileName}`
         });
     } catch (error) {
         console.error('Error generating landing page:', error);

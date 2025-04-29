@@ -36,11 +36,12 @@ app.use(linksRouter);
 app.use(userRouter);
 
 // Handle clean URLs for landing pages
-app.get('/build/:id', (req, res) => {
+app.get('/:id', (req, res) => {
     const landingPath = path.join(__dirname, 'build', req.params.id, 'index.html');
     res.sendFile(landingPath);
 });
-app.get('/build/:id/*', (req, res) => {
+
+app.get('/:id/*', (req, res) => {
     const imageFile = path.join(__dirname, 'build', req.params.id, req.params[0]);
     res.sendFile(imageFile);
 });

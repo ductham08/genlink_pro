@@ -43,7 +43,11 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
 
             setGeneratedUrl(response.url);
             form.resetFields();
+            setImageFile(null);
+            setImagePreview(null);
+            setUseCustomSuffix(false);
             onClose();
+            message.success('Tạo link thành công!');
         } catch (error: any) {
             message.error(error?.data?.message || 'Không thể tạo trang landing');
         } finally {
@@ -215,7 +219,6 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
                             </Form.Item>
                         </div>
                     </Form>
-
                 </div>
             </Modal>
             {generatedUrl && (

@@ -4,7 +4,7 @@ import { customBaseQuery } from "./customBaseQuery";
 export const generateLinkApi = createApi({
     reducerPath: "generateLink",
     baseQuery: customBaseQuery,
-    tagTypes: ['generateLink', 'links'],
+    tagTypes: ['Link'],
     endpoints: (builder) => ({
         generateLanding: builder.mutation<any, any>({
             query(data) {
@@ -14,7 +14,7 @@ export const generateLinkApi = createApi({
                     body: data
                 }
             },
-            invalidatesTags: ['generateLink']
+            invalidatesTags: ['Link']
         }),
         getLinks: builder.query<any, { limit?: number }>({
             query: ({ limit }) => ({
@@ -22,7 +22,7 @@ export const generateLinkApi = createApi({
                 method: 'GET',
                 params: { limit }
             }),
-            providesTags: ['links']
+            providesTags: ['Link']
         }),
         deleteLink: builder.mutation<any, string>({
             query(id) {
@@ -31,7 +31,7 @@ export const generateLinkApi = createApi({
                     method: 'DELETE'
                 }
             },
-            invalidatesTags: ['links']
+            invalidatesTags: ['Link']
         }),
         editLink: builder.mutation<any, { id: string; customSuffix: string }>({
             query({ id, customSuffix }) {
@@ -41,7 +41,7 @@ export const generateLinkApi = createApi({
                     body: { customSuffix }
                 }
             },
-            invalidatesTags: ['links']
+            invalidatesTags: ['Link']
         })
     })
 })
