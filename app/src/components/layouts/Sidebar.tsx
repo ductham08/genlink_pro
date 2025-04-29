@@ -6,7 +6,6 @@ import {
     CloseOutlined,
     AppstoreAddOutlined,
     DotChartOutlined,
-    UserOutlined,
     LogoutOutlined
 } from '@ant-design/icons';
 

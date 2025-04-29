@@ -15,7 +15,7 @@ const LinkNotification: React.FC<LinkNotificationProps> = ({ url, onClose }) => 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url).then(() => {
       message.success('Đã sao chép liên kết!');
-    }).catch((err: any) => {
+    }).catch(() => {
       message.error('Không thể sao chép liên kết');
     });
   };
