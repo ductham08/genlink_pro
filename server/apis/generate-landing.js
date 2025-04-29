@@ -10,6 +10,7 @@ import User from '../models/user.js';
 import Link from '../models/link.js';
 import authenticateToken from '../middleware/authenticate.js';
 
+
 dotenv.config();
 
 // Get the current file's directory
