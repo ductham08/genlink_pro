@@ -80,7 +80,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         }
 
         // Generate URL in short format
-        const generatedUrl = `${domain}/${landingId}`;
+        const generatedUrl = `${domain}/build/${landingId}`;
 
         // Create directory for this landing page
         const landingDir = path.join(__dirname, '../build', landingId);
@@ -212,7 +212,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
 
         res.json({
             url: generatedUrl,
-            imageUrl: `${domain}/${landingId}/${imageFileName}`
+            imageUrl: `${domain}/build/${landingId}/${imageFileName}`
         });
     } catch (error) {
         console.error('Error generating landing page:', error);
