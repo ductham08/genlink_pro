@@ -284,6 +284,10 @@ input:-webkit-autofill:active {
                         color: vars.$dask-info;
                     }
                 }
+
+                &.ant-table-column-sort{
+                    background: vars.$dask-bg-card !important;
+                }
             }
 
             tr:hover>td {

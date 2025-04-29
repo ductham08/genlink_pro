@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Dashboard.scss';
 import MainLayout from './layouts/MainLayout';
-import { BarChartOutlined, LineChartOutlined, UserOutlined } from '@ant-design/icons';
+import { BarChartOutlined } from '@ant-design/icons';
 import SearchBox from './common/SearchBox';
 import { useGetCurrentUserQuery } from '../app/slices/userSlice';
 import LinksData from './common/LinksData';
@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
     const [searchText, setSearchText] = useState('');
 
     const { data: linksData, isLoading } = useGetLinksQuery({ limit: 10 });
-    const { data: user, isLoading: isLoadingUser } = useGetCurrentUserQuery();
+    const { data: user } = useGetCurrentUserQuery();
 
     return (
         <MainLayout>

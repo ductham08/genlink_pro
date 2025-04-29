@@ -145,17 +145,17 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Vui lòng nhập suffix!'
+                                            message: 'Vui lòng nhập đuôi link tùy chỉnh!'
                                         },
                                         {
-                                            pattern: /^[a-zA-Z0-9-]{4,20}$/,
-                                            message: 'Sunffix chỉ được chứa chữ, số và dấu gạch ngang (-), từ 4-20 ký tự!'
+                                            pattern: /^[a-zA-Z0-9-]{4,35}$/,
+                                            message: 'Đuôi link chỉ được chứa chữ, số và dấu gạch ngang (-), từ 4-35 ký tự!'
                                         }
                                     ]}
                                 >
-                                    <Input allowClear placeholder="Nhập suffix tùy chỉnh..." />
+                                    <Input allowClear placeholder="Nhập đuôi link tùy chỉnh..." />
                                 </Form.Item>
-                                <i>Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-20 ký tự</i>
+                                <i>Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-35 ký tự</i>
                             </div>
                         )}
 

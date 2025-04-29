@@ -119,9 +119,9 @@ router.put('/api/links/:id', authMiddleware, async (req, res) => {
 
         // Validate new suffix
         if (customSuffix) {
-            if (!/^[a-zA-Z0-9-]{4,20}$/.test(customSuffix)) {
+            if (!/^[a-zA-Z0-9-]{4,35}$/.test(customSuffix)) {
                 return res.status(400).json({
-                    message: 'Suffix phải chứa từ 4-20 ký tự chữ, số và dấu gạch ngang (-)!',
+                    message: 'Suffix phải chứa từ 4-35 ký tự chữ, số và dấu gạch ngang (-)!',
                     error_code: 1007
                 });
             }

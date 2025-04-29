@@ -210,7 +210,7 @@ const LinksData: React.FC<LinksDataProps> = ({
                     placeholder="Nhập đuôi link mới"
                 />
                 <p style={{ marginTop: 8, color: '#666' }}>
-                    Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-20 ký tự
+                    Chỉ được phép sử dụng chữ, số và dấu gạch ngang (-), từ 4-35 ký tự
                 </p>
             </Modal>
         </div>
