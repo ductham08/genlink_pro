@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Space, Button, Modal, message, Tooltip } from 'antd';
+import { Table, Space, Button, Modal, message } from 'antd';
 import { useDeleteLinkMutation } from '../../app/slices/link';
 import { LinkOutlined } from '@ant-design/icons';
 import '../../styles/LinksData.scss';
