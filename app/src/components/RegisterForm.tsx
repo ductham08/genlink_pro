@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/RegisterForm.scss';
 import { useRegisterMutation } from '../app/slices/authenticate';
 
 const RegisterForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
+    const [register] = useRegisterMutation();
+    const navigate = useNavigate();
 
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
-            const [ register ] = useRegisterMutation()
-            const response = await register(values)
-
-            if (response.data?.error_code === 200) {
-                message.success(response.data.message);
+            const response = await register(values).unwrap();
+            
+            if (response.error_code === 200) {
+                message.success(response.message, 2, () => {
+                    navigate('/login');
+                });
             } else {
-                message.error(response.data.message);
+                message.error(response.message || 'Đăng ký thất bại!');
             }
-        } catch (error) {
-            message.error('Có lỗi xảy ra, vui lòng thử lại!');
+        } catch (error: any) {
+            message.error(error?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại!');
         } finally {
             setLoading(false);
         }
@@ -51,7 +54,6 @@ const RegisterForm: React.FC = () => {
                             <Form.Item
                                 label="Tài khoản Telegram"
                                 name="telegram"
-                                rules={[{ required: true, message: 'Vui lòng nhập tài khoản telegram!' }]}
                             >
                                 <Input placeholder="@username" />
                             </Form.Item>
