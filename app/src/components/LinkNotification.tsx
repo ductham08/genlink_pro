@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Tooltip, Modal } from 'antd';
+import { Typography, Button, Tooltip, Modal, message } from 'antd';
 import { CopyOutlined, LinkOutlined } from '@ant-design/icons';
 
 const { Paragraph } = Typography;
@@ -14,10 +14,9 @@ const LinkNotification: React.FC<LinkNotificationProps> = ({ url, onClose }) => 
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url).then(() => {
-      alert('Đã sao chép liên kết vào clipboard!');
-    }).catch((err) => {
-      console.error('Không thể sao chép liên kết:', err);
-      alert('Không thể sao chép liên kết. Vui lòng thử lại.');
+      message.success('Đã sao chép liên kết!');
+    }).catch((err: any) => {
+      message.error('Không thể sao chép liên kết');
     });
   };
 
