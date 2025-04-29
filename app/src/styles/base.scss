@@ -262,6 +262,17 @@ input:-webkit-autofill:active {
                 color: vars.$dask-text-primary !important;
             }
 
+            .ant-table-tbody>tr.ant-table-placeholder{
+                background-color: vars.$dask-bg-card !important;
+                &:hover{
+                    background-color: vars.$dask-bg-card !important;
+                }
+
+                .ant-empty-description{
+                    color: vars.$dask-text-primary !important;
+                }
+            }
+
             .ant-table-tbody>tr>td {
                 font-size: 13px;
                 padding: 5px 8px;
