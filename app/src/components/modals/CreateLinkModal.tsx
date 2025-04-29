@@ -92,6 +92,7 @@ const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ isOpen, onClose }) =>
                         onFinish={onFinish}
                         layout="vertical"
                         className="form-landing"
+                        autoComplete="off"
                     >
                         <div className="item-form">
                             <Form.Item

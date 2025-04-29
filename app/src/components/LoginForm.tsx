@@ -49,6 +49,7 @@ const LoginForm: React.FC = () => {
                             initialValues={{ remember: false }}
                             onFinish={onFinish}
                             layout="vertical"
+                            autoComplete="off"
                         >
                             <Form.Item
                                 label="Tên đăng nhập"
@@ -77,9 +78,6 @@ const LoginForm: React.FC = () => {
                             </div>
                         </Form>
                     </div>
-                </div>
-                <div className="login-image-section">
-                    <img src="/images/bunny.jpg" alt="Bunny" />
                 </div>
             </div>
         </div>

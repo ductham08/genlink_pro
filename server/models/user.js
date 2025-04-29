@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-// Định nghĩa schema cho người dùng
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
     telegram: { type: String },

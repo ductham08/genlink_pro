@@ -28,9 +28,6 @@ const RegisterForm: React.FC = () => {
     return (
         <div className="register-container">
             <div className="register-content">
-                <div className="register-image-section">
-                    <img src="/images/bunny.jpg" alt="Bunny" />
-                </div>
                 <div className="register-form-section">
                     <div className="register-form-content">
                         <h1>Đăng ký tài khoản</h1>
@@ -40,6 +37,7 @@ const RegisterForm: React.FC = () => {
                             name="register_form"
                             className="register-form"
                             onFinish={onFinish}
+                            autoComplete="off"
                             layout="vertical"
                         >
                             <Form.Item

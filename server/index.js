@@ -7,6 +7,7 @@ import authRouter from './apis/auth.js';
 import registerRouter from './apis/register.js';
 import trackVisitRouter from './apis/track-visit.js';
 import linksRouter from './apis/links.js';
+import userRouter from './apis/user.js';
 import connectDB from './database.js';
 import { fileURLToPath } from 'url';
 
@@ -32,6 +33,7 @@ app.use(registerRouter);
 app.use(generateLandingRouter);
 app.use(trackVisitRouter);
 app.use(linksRouter);
+app.use(userRouter);
 
 // Handle clean URLs for landing pages
 app.get('/build/:id', (req, res) => {
