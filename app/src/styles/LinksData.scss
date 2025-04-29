@@ -1,0 +1,41 @@
+.links-data {
+    .link-cell {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 8px;
+
+        &:hover {
+            .link-actions {
+                opacity: 1;
+            }
+        }
+
+        .link-actions {
+            position: absolute;
+            right: 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+            display: flex;
+            gap: 4px;
+
+            .ant-btn {
+                padding: 0;
+                height: 24px;
+                width: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        a {
+            flex: 1;
+            margin-right: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+} 

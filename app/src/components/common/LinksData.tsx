@@ -1,6 +1,8 @@
 import React from 'react';
-import { Table, Space, Button, Modal, message } from 'antd';
+import { Table, Space, Button, Modal, message, Tooltip } from 'antd';
 import { useDeleteLinkMutation } from '../../app/slices/link';
+import { CopyOutlined, LinkOutlined } from '@ant-design/icons';
+import '../../styles/LinksData.scss';
 
 interface LinkData {
     _id: string;
@@ -53,15 +55,41 @@ const LinksData: React.FC<LinksDataProps> = ({
         setDeleteModalVisible(true);
     };
 
+    const handleCopyLink = (text: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            message.success('Đã sao chép liên kết!');
+        }).catch(() => {
+            message.error('Không thể sao chép liên kết');
+        });
+    };
+
     const columns = [
         {
             title: 'Link gốc',
             dataIndex: 'redirectUrl',
             key: 'redirectUrl',
             render: (text: string) => (
-                <a href={text} target="_blank" rel="noopener noreferrer">
-                    {text}
-                </a>
+                <div className="link-cell">
+                    <a href={text} target="_blank" rel="noopener noreferrer">
+                        {text}
+                    </a>
+                    <div className="link-actions">
+                        <Tooltip title="Sao chép">
+                            <Button 
+                                type="text" 
+                                icon={<CopyOutlined />} 
+                                onClick={() => handleCopyLink(text)}
+                            />
+                        </Tooltip>
+                        <Tooltip title="Mở">
+                            <Button 
+                                type="text" 
+                                icon={<LinkOutlined />} 
+                                onClick={() => window.open(text, '_blank')}
+                            />
+                        </Tooltip>
+                    </div>
+                </div>
             )
         },
         {
@@ -69,9 +97,27 @@ const LinksData: React.FC<LinksDataProps> = ({
             dataIndex: 'url',
             key: 'url',
             render: (text: string) => (
-                <a href={text} target="_blank" rel="noopener noreferrer">
-                    {text}
-                </a>
+                <div className="link-cell">
+                    <a href={text} target="_blank" rel="noopener noreferrer">
+                        {text}
+                    </a>
+                    <div className="link-actions">
+                        <Tooltip title="Sao chép">
+                            <Button 
+                                type="text" 
+                                icon={<CopyOutlined />} 
+                                onClick={() => handleCopyLink(text)}
+                            />
+                        </Tooltip>
+                        <Tooltip title="Mở">
+                            <Button 
+                                type="text" 
+                                icon={<LinkOutlined />} 
+                                onClick={() => window.open(text, '_blank')}
+                            />
+                        </Tooltip>
+                    </div>
+                </div>
             )
         },
         {
