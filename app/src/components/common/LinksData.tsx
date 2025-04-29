@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Space, Button, Modal, message, Tooltip } from 'antd';
 import { useDeleteLinkMutation } from '../../app/slices/link';
-import { CopyOutlined, LinkOutlined } from '@ant-design/icons';
+import { LinkOutlined } from '@ant-design/icons';
 import '../../styles/LinksData.scss';
 
 interface LinkData {
@@ -70,24 +70,18 @@ const LinksData: React.FC<LinksDataProps> = ({
             key: 'redirectUrl',
             render: (text: string) => (
                 <div className="link-cell">
-                    <a href={text} target="_blank" rel="noopener noreferrer">
+                    <span 
+                        className="link-text"
+                        onClick={() => handleCopyLink(text)}
+                    >
                         {text}
-                    </a>
+                    </span>
                     <div className="link-actions">
-                        <Tooltip title="Sao chép">
-                            <Button 
-                                type="text" 
-                                icon={<CopyOutlined />} 
-                                onClick={() => handleCopyLink(text)}
-                            />
-                        </Tooltip>
-                        <Tooltip title="Mở">
-                            <Button 
-                                type="text" 
-                                icon={<LinkOutlined />} 
-                                onClick={() => window.open(text, '_blank')}
-                            />
-                        </Tooltip>
+                        <Button 
+                            type="text" 
+                            icon={<LinkOutlined />} 
+                            onClick={() => window.open(text, '_blank')}
+                        />
                     </div>
                 </div>
             )
@@ -98,24 +92,18 @@ const LinksData: React.FC<LinksDataProps> = ({
             key: 'url',
             render: (text: string) => (
                 <div className="link-cell">
-                    <a href={text} target="_blank" rel="noopener noreferrer">
+                    <span 
+                        className="link-text"
+                        onClick={() => handleCopyLink(text)}
+                    >
                         {text}
-                    </a>
+                    </span>
                     <div className="link-actions">
-                        <Tooltip title="Sao chép">
-                            <Button 
-                                type="text" 
-                                icon={<CopyOutlined />} 
-                                onClick={() => handleCopyLink(text)}
-                            />
-                        </Tooltip>
-                        <Tooltip title="Mở">
-                            <Button 
-                                type="text" 
-                                icon={<LinkOutlined />} 
-                                onClick={() => window.open(text, '_blank')}
-                            />
-                        </Tooltip>
+                        <Button 
+                            type="text" 
+                            icon={<LinkOutlined />} 
+                            onClick={() => window.open(text, '_blank')}
+                        />
                     </div>
                 </div>
             )

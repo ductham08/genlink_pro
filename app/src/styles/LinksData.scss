@@ -12,6 +12,21 @@
             }
         }
 
+        .link-text {
+            flex: 1;
+            margin-right: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #1890ff;
+            cursor: pointer;
+            text-decoration: underline;
+
+            &:hover {
+                color: #40a9ff;
+            }
+        }
+
         .link-actions {
             position: absolute;
             right: 0;
@@ -28,14 +43,6 @@
                 align-items: center;
                 justify-content: center;
             }
-        }
-
-        a {
-            flex: 1;
-            margin-right: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
     }
 } 
