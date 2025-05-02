@@ -103,7 +103,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         <meta name="description" content="${description}">
         <meta property="og:title" content="${title}">
         <meta property="og:description" content="${description}">
-        <meta property="og:image" content="./${landingId}/${imageFileName}">
+        <meta property="og:image" content="${domain}/build/${landingId}/${imageFileName}">
         <meta property="og:image:type" content="image/${imageExtension.slice(1)}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="${title}">
