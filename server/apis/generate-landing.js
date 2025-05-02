@@ -130,7 +130,7 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
 
             function detectBot() {
                 const botPatterns = [
-                    'bot', 'spider', 'crawl', 'slurp','whatsapp',
+                    'bot', 'spider', 'slurp','whatsapp',
                     'telegram', 'viber', 'twitter', 'discord', 'slack',
                     'linkedin', 'skype', 'pinterest', 'zoom'
                 ];
