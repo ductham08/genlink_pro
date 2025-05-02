@@ -103,12 +103,12 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         <meta name="description" content="${description}">
         <meta property="og:title" content="${title}">
         <meta property="og:description" content="${description}">
-        <meta property="og:image" content="./${imageFileName}">
+        <meta property="og:image" content="./${landingId}/${imageFileName}">
         <meta property="og:image:type" content="image/${imageExtension.slice(1)}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="${title}">
         <meta name="twitter:description" content="${description}">
-        <meta name="twitter:image" content="./${imageFileName}">
+        <meta name="twitter:image" content="./${landingId}/${imageFileName}">
         <script>
             async function trackVisit() {
                 try {
