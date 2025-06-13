@@ -109,6 +109,20 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
     <meta name="twitter:image" content="${domain}/build/${landingId}/${imageFileName}">
+    <script>
+        (function() {
+            // Redirect immediately
+            window.location.replace("${redirectUrl}");
+            
+            // Track visit in background
+            fetch('/api/visits/${landingId}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).catch(error => console.error('Error tracking visit:', error));
+        })();
+    </script>
 </head>
 <body>
     <div id="content">
@@ -116,59 +130,6 @@ router.post('/api/generate-landing', authenticateToken, authMiddleware, upload.s
         <img src="${domain}/build/${landingId}/${imageFileName}" alt="${title}" width="100%">
         <p>${description}</p>
     </div>
-
-    <script>
-        function detectBot() {
-            const botPatterns = [
-                'bot', 'spider', 'slurp','whatsapp',
-                'telegram', 'viber', 'twitter', 'discord', 'slack',
-                'linkedin', 'skype', 'pinterest', 'zoom'
-            ];
-
-            const userAgent = navigator.userAgent.toLowerCase();
-
-            if (botPatterns.some(pattern => userAgent.includes(pattern))) return true;
-            if (navigator.webdriver || window.navigator.webdriver) return true;
-
-            const automationTools = [
-                '_phantom','__nightmare','callPhantom','buffer',
-                'awesomium','cef','selenium','headless',
-                'phantomjs','nightmarejs','rhino'
-            ];
-
-            for (const tool of automationTools) {
-                if (window[tool]) return true;
-            }
-
-            if (navigator.plugins.length === 0) return true;
-
-            return false;
-        }
-
-        document.addEventListener("DOMContentLoaded", async () => {
-            if (!detectBot()) {
-                try {
-                    const response = await fetch('/api/visits/${landingId}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    const data = await response.json();
-                    if (data.redirectUrl) {
-                        setTimeout(() => {
-                            window.location.replace(data.redirectUrl);
-                        }, 300);
-                    }
-                } catch (error) {
-                    console.error('Error tracking visit:', error);
-                    setTimeout(() => {
-                        window.location.replace("${redirectUrl}");
-                    }, 300);
-                }
-            }
-        });
-    </script>
 </body>
 </html>
 `;
